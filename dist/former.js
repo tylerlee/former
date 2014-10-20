@@ -7,7 +7,6 @@
     root.former = factory(root.React, root.Cursors);
   }
 })(this, function (React, Cursors) {
-  return (function () {
 // bower_components/amdainty/amdainty.js
 var define;
 var require;
@@ -95,5 +94,4 @@ define(
   });
 
 return require('former');
-  }).call({});
 }));

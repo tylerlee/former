@@ -7,4 +7,3 @@
     root.former = factory(root.React, root.Cursors);
   }
 })(this, function (React, Cursors) {
-  return (function () {

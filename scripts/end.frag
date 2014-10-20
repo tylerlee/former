@@ -1,3 +1,2 @@
-    return require('former');
-  }).call({});
+  return require('former');
 }));
