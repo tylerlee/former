@@ -1,0 +1,13 @@
+{
+  "name": "former",
+  "version": "0.0.1",
+  "ignore": [
+    "/.gitignore",
+    "/.npmignore",
+    "/node_modules",
+    "/package.json"
+  ],
+  "dependencies": {
+    "react": "^0.11.0"
+  }
+}
