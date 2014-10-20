@@ -3,11 +3,13 @@
   "version": "0.0.1",
   "ignore": [
     "/.gitignore",
-    "/.npmignore",
     "/node_modules",
     "/package.json"
   ],
-  "dependencies": {
-    "react": "^0.11.0"
+  "devDependencies": {
+    "amdainty": "0.1.0",
+    "cursors": "0.4.0",
+    "react": "0.11.2",
+    "underscore": "1.7.0"
   }
 }
