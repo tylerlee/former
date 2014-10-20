@@ -1,0 +1,15 @@
+{
+  "options": {
+    "basePath": "scripts",
+    "names": {
+      "cursors": "bower_components/cursors/cursors.js",
+      "react": "bower_components/react/react-with-addons.js",
+      "react-list": "bower_components/react-list/react-list.js"
+    },
+    "concatAmd": true,
+    "processors.es6.options.compatFix": true
+  },
+  "targets": {
+    "scripts/former.es6": "dist"
+  }
+}
