@@ -7,10 +7,12 @@
     "/package.json"
   ],
   "devDependencies": {
-    "amdainty": "0.2.0"
+    "amdainty": "0.2.0",
+    "normalize.css": "3.0.2"
   },
   "dependencies": {
     "cursors": "^0.4.0",
+    "underscore": "^1.7.0",
     "react": "^0.11.0"
   }
 }
