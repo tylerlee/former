@@ -4,3 +4,6 @@
 //= require ./end.frag
 
 import React from 'react';
+import Form from 'form';
+
+export var Form = Form;
