@@ -80,10 +80,210 @@ define(
     __exports__["default"] = React;
   });
 
+// scripts/underscore.es6
+define(
+  'underscore', ["exports"],
+  function(__exports__) {
+    "use strict";
+    if (!Object.assign) Object.assign = _.extend;
+
+    __exports__["default"] = _;
+  });
+
+// scripts/form.es6.jsx
+define(
+  'form', ["underscore","react","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
+    "use strict";
+    /** @jsx React.DOM */
+
+    var _ = __dependency1__["default"] || __dependency1__;
+    var React = __dependency2__["default"] || __dependency2__;
+
+    var Form = React.createClass({displayName: 'Form',
+      render: function() {
+        return(
+          React.DOM.form({action: this.props.action}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    var ElementWrapper = React.createClass({displayName: 'ElementWrapper',
+      renderNote: function(){
+        if(this.props.note) return React.DOM.p({className: "note"}, this.props.note);
+      },
+
+      render: function() {
+        var classes = 'form ' + this.props.className;
+        return(
+          React.DOM.dl({className: classes}, 
+            React.DOM.dt(null, React.DOM.label(null, this.props.label)), 
+            this.renderNote(), 
+            React.DOM.dd(null, this.props.children)
+          )
+        );
+      }
+    });
+
+    var BasicInput = React.createClass({displayName: 'BasicInput',
+      render: function() {
+        var requiredClass = this.props.required ? 'required' : '';
+        return (
+          ElementWrapper({
+            label: this.props.label, 
+            note: this.props.note, 
+            className: requiredClass}, 
+            React.DOM.input(Object.assign({}, _.omit(this.props, 'label')))
+          )
+        );
+      }
+    });
+
+    var TextArea = React.createClass({displayName: 'TextArea',
+
+      render: function() {
+        return(
+          ElementWrapper({label: this.props.label}, 
+            React.DOM.textarea(Object.assign({}, _.omit(this.props, 'label')))
+          )
+        );
+      }
+    });
+
+    var SelectInput = React.createClass({displayName: 'SelectInput',
+      render: function(){
+        return (
+          ElementWrapper({label: this.props.label}, 
+            React.DOM.select(Object.assign({}, _.omit(this.props, 'label')), 
+              this.props.children
+            )
+          )
+        );
+      }
+    });
+
+    var CheckboxInput = React.createClass({displayName: 'CheckboxInput',
+      render: function (){
+        return(
+          React.DOM.div({className: "form-checkbox"}, 
+            React.DOM.label(null, 
+              React.DOM.input(Object.assign({
+                type: "checkbox"}, _.omit(this.props, 'label'))), 
+              this.props.label
+            )
+          )
+        );
+      }
+    });
+
+    var RadioInput = React.createClass({displayName: 'RadioInput',
+      render: function (){
+        return(
+          React.DOM.div({className: "form-checkbox"}, 
+            React.DOM.label(null, 
+              React.DOM.input(Object.assign({
+                type: "radio"}, _.omit(this.props, 'label'))), 
+              this.props.label
+            )
+          )
+        );
+      }
+    });
+
+    var RadioGroup = React.createClass({displayName: 'RadioGroup',
+      render: function(){
+        return(
+          React.DOM.div({class: "form-group"}, 
+            React.DOM.label(null, this.props.label), 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    var TextInput = React.createClass({displayName: 'TextInput',
+      render: function() {
+        return BasicInput(Object.assign({type: "text"}, this.props));
+      }
+    });
+
+    var NumberInput = React.createClass({displayName: 'NumberInput',
+      render: function() {
+        return BasicInput(Object.assign({type: "number"}, this.props));
+      }
+    });
+
+    var UrlInput = React.createClass({displayName: 'UrlInput',
+      render: function() {
+        return BasicInput(Object.assign({type: "url"}, this.props));
+      }
+    });
+
+    var PasswordInput = React.createClass({displayName: 'PasswordInput',
+      render: function() {
+        return BasicInput(Object.assign({type: "password"}, this.props));
+      }
+    });
+
+    var PhoneInput = React.createClass({displayName: 'PhoneInput',
+      render: function() {
+        return BasicInput(Object.assign({type: "tel"}, this.props));
+      }
+    });
+
+    var EmailInput = React.createClass({displayName: 'EmailInput',
+      render: function() {
+        return BasicInput(Object.assign({type: "email"}, this.props));
+      }
+    });
+
+
+    __exports__["default"] = React.createClass({
+      render: function () {
+        return (
+          Form(null, 
+            React.DOM.h1(null, "Sample Form"), 
+            TextInput({label: "Text Input", size: "50"}), 
+            TextInput({label: "Disabled Text Input", disabled: true}), 
+            TextInput({label: "Required Text Input", disabled: true, required: true}), 
+
+            NumberInput({label: "Number Input", note: "pick something awesome"}), 
+
+            UrlInput({label: "Url Input"}), 
+            PasswordInput({label: "Password Input"}), 
+            PhoneInput({label: "Phone Input"}), 
+            EmailInput({label: "Email Input", placeholder: "tyler@orgsync.com"}), 
+
+            TextArea({label: "Text Area"}), 
+
+            CheckboxInput({label: "blue"}), 
+            CheckboxInput({label: "red"}), 
+
+            RadioInput({label: "Red"}), 
+            RadioInput({label: "White"}), 
+
+            RadioGroup({label: "do you agree to this?"}, 
+              RadioInput({label: "Yes"}), 
+              RadioInput({label: "No"})
+            ), 
+
+            SelectInput({value: "2"}, 
+              React.DOM.option({value: "1"}, "alpha"), 
+              React.DOM.option({value: "2"}, "beta"), 
+              React.DOM.option({value: "3"}, "gamma")
+            )
+          )
+        );
+      }
+    });
+  });
+
 // scripts/former.es6
 define(
-  'former', ["react"],
-  function(__dependency1__) {
+  'former', ["react","form","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
 
 
@@ -91,6 +291,10 @@ define(
 
 
     var React = __dependency1__["default"] || __dependency1__;
+    var Form = __dependency2__["default"] || __dependency2__;
+
+    var Form = Form;
+    __exports__.Form = Form;
   });
 
 return require('former');

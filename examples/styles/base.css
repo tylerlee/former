@@ -1,0 +1,60 @@
+body{
+  background: #f4f4f4;
+  line-height: 1.5rem;
+  padding: 20px;
+}
+
+form{
+  background: white;
+  border: 1px solid #dedede;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+}
+
+dd{
+  margin: 0;
+}
+
+dl, .form-checkbox{
+  margin-bottom: 1rem;
+}
+
+label, p{
+  margin: 0;
+}
+
+dd{
+  margin-top: .5rem;
+}
+
+.form-checkbox input{
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.note{
+  color: #777;
+  font-size: .8rem;
+}
+
+.required label:after{
+  color: red;
+  content: 'REQUIRED';
+  font-size: .8rem;
+  margin-left: 5px;
+  opacity: .5;
+}
+
+textarea,
+select,
+input{
+  max-width: 400px;
+  width: 100%;
+}
+
+input[type="checkbox"],
+input[type="radio"]{
+  width: inherit;
+}
+
