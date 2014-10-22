@@ -13,6 +13,14 @@ var Form = React.createClass({
   }
 });
 
+var Submit = React.createClass({
+  render: function() {
+    return(
+      <input type="submit" {...this.props} />
+    );
+  }
+});
+
 var ElementWrapper = React.createClass({
   renderNote: function(){
     if(this.props.note) return <p className='note'>{this.props.note}</p>;
@@ -97,13 +105,16 @@ var RadioInput = React.createClass({
   }
 });
 
-var RadioGroup = React.createClass({
+var QuestionGroup = React.createClass({
   render: function(){
+    var requiredClass = this.props.required ? 'required' : '';
     return(
-      <div class="form-group">
-        <label>{this.props.label}</label>
+      <ElementWrapper
+        label={this.props.question}
+        note={this.props.note}
+        className={requiredClass} >
         {this.props.children}
-      </div>
+      </ElementWrapper>
     );
   }
 });
@@ -151,8 +162,9 @@ export default React.createClass({
       <Form>
         <h1>Sample Form</h1>
         <TextInput label="Text Input" size="50"/>
+        <TextInput label="Text Input with Placeholder" placeholder="this is some text"/>
         <TextInput label="Disabled Text Input" disabled={true} />
-        <TextInput label="Required Text Input" disabled={true} required={true}/>
+        <TextInput label="Required Text Input" required={true}/>
 
         <NumberInput label="Number Input" note="pick something awesome"/>
 
@@ -163,22 +175,40 @@ export default React.createClass({
 
         <TextArea label="Text Area" />
 
-        <CheckboxInput label="blue" />
-        <CheckboxInput label="red" />
+        <hr />
 
-        <RadioInput label="Red" />
-        <RadioInput label="White" />
-
-        <RadioGroup label="do you agree to this?">
-          <RadioInput label="Yes" />
-          <RadioInput label="No" />
-        </RadioGroup>
-
-        <SelectInput value="2">
+        <SelectInput
+          value="2"
+          label="Pick a version">
           <option value="1">alpha</option>
           <option value="2">beta</option>
           <option value="3">gamma</option>
         </SelectInput>
+
+        <hr />
+
+        <QuestionGroup
+          question="Pick your favorite color?"
+          note="pick one or many">
+          <CheckboxInput name="color" label="blue" />
+          <CheckboxInput name="color" label="red" />
+        </QuestionGroup>
+
+        <hr />
+
+        <RadioInput label="Single Radio" />
+        <CheckboxInput label="Single Checkbox" />
+
+        <hr />
+
+        <QuestionGroup
+          question="do you agree to this?"
+          required="true">
+          <RadioInput name="agreement" label="Yes" />
+          <RadioInput name="agreement" label="No" />
+        </QuestionGroup>
+
+        <Submit />
       </Form>
     );
   }

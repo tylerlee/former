@@ -38,7 +38,7 @@ dd{
   font-size: .8rem;
 }
 
-.required label:after{
+.required dt > label:after{
   color: red;
   content: 'REQUIRED';
   font-size: .8rem;
@@ -48,13 +48,23 @@ dd{
 
 textarea,
 select,
-input{
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="email"],
+input[type="number"],
+input[type="password"]{
+  border: 1px solid #dedede;
+  border-radius: 3px;
   max-width: 400px;
+  padding: 8px;
   width: 100%;
 }
 
-input[type="checkbox"],
-input[type="radio"]{
-  width: inherit;
+
+hr{
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 2rem 0;
 }
 

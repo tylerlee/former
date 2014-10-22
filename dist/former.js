@@ -110,6 +110,14 @@ define(
       }
     });
 
+    var Submit = React.createClass({displayName: 'Submit',
+      render: function() {
+        return(
+          React.DOM.input(Object.assign({type: "submit"}, this.props))
+        );
+      }
+    });
+
     var ElementWrapper = React.createClass({displayName: 'ElementWrapper',
       renderNote: function(){
         if(this.props.note) return React.DOM.p({className: "note"}, this.props.note);
@@ -192,11 +200,14 @@ define(
       }
     });
 
-    var RadioGroup = React.createClass({displayName: 'RadioGroup',
+    var QuestionGroup = React.createClass({displayName: 'QuestionGroup',
       render: function(){
+        var requiredClass = this.props.required ? 'required' : '';
         return(
-          React.DOM.div({class: "form-group"}, 
-            React.DOM.label(null, this.props.label), 
+          ElementWrapper({
+            label: this.props.question, 
+            note: this.props.note, 
+            className: requiredClass}, 
             this.props.children
           )
         );
@@ -246,8 +257,9 @@ define(
           Form(null, 
             React.DOM.h1(null, "Sample Form"), 
             TextInput({label: "Text Input", size: "50"}), 
+            TextInput({label: "Text Input with Placeholder", placeholder: "this is some text"}), 
             TextInput({label: "Disabled Text Input", disabled: true}), 
-            TextInput({label: "Required Text Input", disabled: true, required: true}), 
+            TextInput({label: "Required Text Input", required: true}), 
 
             NumberInput({label: "Number Input", note: "pick something awesome"}), 
 
@@ -258,22 +270,40 @@ define(
 
             TextArea({label: "Text Area"}), 
 
-            CheckboxInput({label: "blue"}), 
-            CheckboxInput({label: "red"}), 
+            React.DOM.hr(null), 
 
-            RadioInput({label: "Red"}), 
-            RadioInput({label: "White"}), 
-
-            RadioGroup({label: "do you agree to this?"}, 
-              RadioInput({label: "Yes"}), 
-              RadioInput({label: "No"})
-            ), 
-
-            SelectInput({value: "2"}, 
+            SelectInput({
+              value: "2", 
+              label: "Pick a version"}, 
               React.DOM.option({value: "1"}, "alpha"), 
               React.DOM.option({value: "2"}, "beta"), 
               React.DOM.option({value: "3"}, "gamma")
-            )
+            ), 
+
+            React.DOM.hr(null), 
+
+            QuestionGroup({
+              question: "Pick your favorite color?", 
+              note: "pick one or many"}, 
+              CheckboxInput({name: "color", label: "blue"}), 
+              CheckboxInput({name: "color", label: "red"})
+            ), 
+
+            React.DOM.hr(null), 
+
+            RadioInput({label: "Single Radio"}), 
+            CheckboxInput({label: "Single Checkbox"}), 
+
+            React.DOM.hr(null), 
+
+            QuestionGroup({
+              question: "do you agree to this?", 
+              required: "true"}, 
+              RadioInput({name: "agreement", label: "Yes"}), 
+              RadioInput({name: "agreement", label: "No"})
+            ), 
+
+            Submit(null)
           )
         );
       }
