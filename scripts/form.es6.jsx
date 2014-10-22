@@ -76,6 +76,9 @@ var SelectInput = React.createClass({
 });
 
 var CheckboxInput = React.createClass({
+  renderNote: function(){
+    if(this.props.note) return <p className='note'>{this.props.note}</p>;
+  },
   render: function (){
     return(
       <div className="form-checkbox">
@@ -85,12 +88,17 @@ var CheckboxInput = React.createClass({
             {..._.omit(this.props, 'label')} />
           {this.props.label}
         </label>
+        {this.renderNote()}
       </div>
     );
   }
 });
 
 var RadioInput = React.createClass({
+  renderNote: function(){
+    if(this.props.note) return <p className='note'>{this.props.note}</p>;
+  },
+
   render: function (){
     return(
       <div className="form-checkbox">
@@ -100,6 +108,7 @@ var RadioInput = React.createClass({
             {..._.omit(this.props, 'label')} />
           {this.props.label}
         </label>
+        {this.renderNote()}
       </div>
     );
   }
@@ -196,8 +205,12 @@ export default React.createClass({
 
         <hr />
 
-        <RadioInput label="Single Radio" />
-        <CheckboxInput label="Single Checkbox" />
+        <RadioInput
+          label="Single Radio"
+          note="this here is a note about this radio button" />
+        <CheckboxInput
+          label="Single Checkbox"
+          note="this here is a note about this checkbox" />
 
         <hr />
 

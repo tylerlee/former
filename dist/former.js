@@ -173,6 +173,9 @@ define(
     });
 
     var CheckboxInput = React.createClass({displayName: 'CheckboxInput',
+      renderNote: function(){
+        if(this.props.note) return React.DOM.p({className: "note"}, this.props.note);
+      },
       render: function (){
         return(
           React.DOM.div({className: "form-checkbox"}, 
@@ -180,13 +183,18 @@ define(
               React.DOM.input(Object.assign({
                 type: "checkbox"}, _.omit(this.props, 'label'))), 
               this.props.label
-            )
+            ), 
+            this.renderNote()
           )
         );
       }
     });
 
     var RadioInput = React.createClass({displayName: 'RadioInput',
+      renderNote: function(){
+        if(this.props.note) return React.DOM.p({className: "note"}, this.props.note);
+      },
+
       render: function (){
         return(
           React.DOM.div({className: "form-checkbox"}, 
@@ -194,7 +202,8 @@ define(
               React.DOM.input(Object.assign({
                 type: "radio"}, _.omit(this.props, 'label'))), 
               this.props.label
-            )
+            ), 
+            this.renderNote()
           )
         );
       }
@@ -291,8 +300,12 @@ define(
 
             React.DOM.hr(null), 
 
-            RadioInput({label: "Single Radio"}), 
-            CheckboxInput({label: "Single Checkbox"}), 
+            RadioInput({
+              label: "Single Radio", 
+              note: "this here is a note about this radio button"}), 
+            CheckboxInput({
+              label: "Single Checkbox", 
+              note: "this here is a note about this checkbox"}), 
 
             React.DOM.hr(null), 
 
