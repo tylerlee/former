@@ -27,7 +27,8 @@ var ElementWrapper = React.createClass({
   },
 
   render: function() {
-    var classes = 'form ' + this.props.className;
+    var classes = 'form';
+    if (this.props.required){ classes += ' required' }
     return(
       <dl className={classes}>
         <dt><label>{this.props.label}</label></dt>
@@ -40,23 +41,24 @@ var ElementWrapper = React.createClass({
 
 var BasicInput = React.createClass({
   render: function() {
-    var requiredClass = this.props.required ? 'required' : '';
     return (
       <ElementWrapper
         label={this.props.label}
         note={this.props.note}
-        className={requiredClass} >
-        <input {..._.omit(this.props, 'label')} />
+        required={this.props.required}>
+        <input {..._.omit(this.props, 'label note')} />
       </ElementWrapper>
     );
   }
 });
 
 var TextArea = React.createClass({
-
   render: function() {
     return(
-      <ElementWrapper label={this.props.label}>
+      <ElementWrapper
+        label={this.props.label}
+        note={this.props.note}
+        required={this.props.required}>
         <textarea {..._.omit(this.props, 'label')} />
       </ElementWrapper>
     );
@@ -66,7 +68,10 @@ var TextArea = React.createClass({
 var SelectInput = React.createClass({
   render: function(){
     return (
-      <ElementWrapper label={this.props.label}>
+      <ElementWrapper
+        label={this.props.label}
+        note={this.props.note}
+        required={this.props.required}>
         <select {..._.omit(this.props, 'label')}>
           {this.props.children}
         </select>
@@ -80,8 +85,10 @@ var CheckboxInput = React.createClass({
     if(this.props.note) return <p className='note'>{this.props.note}</p>;
   },
   render: function (){
+    var classes = 'form-checkbox';
+    if (this.props.required){ classes += ' required' }
     return(
-      <div className="form-checkbox">
+      <div className={classes}>
         <label>
           <input
             type="checkbox"
@@ -100,8 +107,10 @@ var RadioInput = React.createClass({
   },
 
   render: function (){
+    var classes = 'form-checkbox';
+    if (this.props.required){ classes += ' required' }
     return(
-      <div className="form-checkbox">
+      <div className={classes}>
         <label>
           <input
             type="radio"
@@ -116,12 +125,12 @@ var RadioInput = React.createClass({
 
 var QuestionGroup = React.createClass({
   render: function(){
-    var requiredClass = this.props.required ? 'required' : '';
     return(
       <ElementWrapper
         label={this.props.question}
         note={this.props.note}
-        className={requiredClass} >
+        className='form-checkbox'
+        required={this.props.required}>
         {this.props.children}
       </ElementWrapper>
     );
@@ -168,39 +177,47 @@ var EmailInput = React.createClass({
 export default React.createClass({
   render: function () {
     return (
-      <Form>
+      <Form action="/test">
         <h1>Sample Form</h1>
-        <TextInput label="Text Input" size="50"/>
-        <TextInput label="Text Input with Placeholder" placeholder="this is some text"/>
+        <TextInput label="Text Input" size="50" columns="3"/>
+        <TextInput label="Text Input with Placeholder" placeholder="this is some text" columns="3"/>
         <TextInput label="Disabled Text Input" disabled={true} />
         <TextInput label="Required Text Input" required={true}/>
 
         <NumberInput label="Number Input" note="pick something awesome"/>
 
-        <UrlInput label="Url Input"/>
+        <UrlInput
+          className='input-error'
+          label="Url Input"
+          note="Input Error is not currently a working feature"/>
         <PasswordInput label="Password Input" />
         <PhoneInput label="Phone Input" />
         <EmailInput label="Email Input" placeholder="tyler@orgsync.com" />
 
-        <TextArea label="Text Area" />
+        <TextArea label="Text Area" required={true}/>
 
         <hr />
 
         <SelectInput
           value="2"
-          label="Pick a version">
-          <option value="1">alpha</option>
-          <option value="2">beta</option>
-          <option value="3">gamma</option>
+          label="Pick a version"
+          note="You can only pick one.">
+          <option value="1">Alpha</option>
+          <option value="2">Beta</option>
+          <option value="3">Gamma</option>
+          <option value="4">Delta</option>
+          <option value="5">Iota</option>
         </SelectInput>
 
         <hr />
 
         <QuestionGroup
-          question="Pick your favorite color?"
-          note="pick one or many">
-          <CheckboxInput name="color" label="blue" />
-          <CheckboxInput name="color" label="red" />
+          question="What colors do you prefer?"
+          note="Pick as many as you would like">
+          <CheckboxInput name="color" label="Blue" />
+          <CheckboxInput name="color" label="Red" />
+          <CheckboxInput name="color" label="Green" />
+          <CheckboxInput name="color" label="Orange" />
         </QuestionGroup>
 
         <hr />
@@ -215,8 +232,8 @@ export default React.createClass({
         <hr />
 
         <QuestionGroup
-          question="do you agree to this?"
-          required="true">
+          question="Do you agree to this?"
+          required={true}>
           <RadioInput name="agreement" label="Yes" />
           <RadioInput name="agreement" label="No" />
         </QuestionGroup>

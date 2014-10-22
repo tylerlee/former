@@ -124,7 +124,8 @@ define(
       },
 
       render: function() {
-        var classes = 'form ' + this.props.className;
+        var classes = 'form';
+        if (this.props.required){ classes += ' required' }
         return(
           React.DOM.dl({className: classes}, 
             React.DOM.dt(null, React.DOM.label(null, this.props.label)), 
@@ -137,23 +138,24 @@ define(
 
     var BasicInput = React.createClass({displayName: 'BasicInput',
       render: function() {
-        var requiredClass = this.props.required ? 'required' : '';
         return (
           ElementWrapper({
             label: this.props.label, 
             note: this.props.note, 
-            className: requiredClass}, 
-            React.DOM.input(Object.assign({}, _.omit(this.props, 'label')))
+            required: this.props.required}, 
+            React.DOM.input(Object.assign({}, _.omit(this.props, 'label note')))
           )
         );
       }
     });
 
     var TextArea = React.createClass({displayName: 'TextArea',
-
       render: function() {
         return(
-          ElementWrapper({label: this.props.label}, 
+          ElementWrapper({
+            label: this.props.label, 
+            note: this.props.note, 
+            required: this.props.required}, 
             React.DOM.textarea(Object.assign({}, _.omit(this.props, 'label')))
           )
         );
@@ -163,7 +165,10 @@ define(
     var SelectInput = React.createClass({displayName: 'SelectInput',
       render: function(){
         return (
-          ElementWrapper({label: this.props.label}, 
+          ElementWrapper({
+            label: this.props.label, 
+            note: this.props.note, 
+            required: this.props.required}, 
             React.DOM.select(Object.assign({}, _.omit(this.props, 'label')), 
               this.props.children
             )
@@ -177,8 +182,10 @@ define(
         if(this.props.note) return React.DOM.p({className: "note"}, this.props.note);
       },
       render: function (){
+        var classes = 'form-checkbox';
+        if (this.props.required){ classes += ' required' }
         return(
-          React.DOM.div({className: "form-checkbox"}, 
+          React.DOM.div({className: classes}, 
             React.DOM.label(null, 
               React.DOM.input(Object.assign({
                 type: "checkbox"}, _.omit(this.props, 'label'))), 
@@ -196,8 +203,10 @@ define(
       },
 
       render: function (){
+        var classes = 'form-checkbox';
+        if (this.props.required){ classes += ' required' }
         return(
-          React.DOM.div({className: "form-checkbox"}, 
+          React.DOM.div({className: classes}, 
             React.DOM.label(null, 
               React.DOM.input(Object.assign({
                 type: "radio"}, _.omit(this.props, 'label'))), 
@@ -211,12 +220,12 @@ define(
 
     var QuestionGroup = React.createClass({displayName: 'QuestionGroup',
       render: function(){
-        var requiredClass = this.props.required ? 'required' : '';
         return(
           ElementWrapper({
             label: this.props.question, 
             note: this.props.note, 
-            className: requiredClass}, 
+            className: "form-checkbox", 
+            required: this.props.required}, 
             this.props.children
           )
         );
@@ -263,39 +272,47 @@ define(
     __exports__["default"] = React.createClass({
       render: function () {
         return (
-          Form(null, 
+          Form({action: "/test"}, 
             React.DOM.h1(null, "Sample Form"), 
-            TextInput({label: "Text Input", size: "50"}), 
-            TextInput({label: "Text Input with Placeholder", placeholder: "this is some text"}), 
+            TextInput({label: "Text Input", size: "50", columns: "3"}), 
+            TextInput({label: "Text Input with Placeholder", placeholder: "this is some text", columns: "3"}), 
             TextInput({label: "Disabled Text Input", disabled: true}), 
             TextInput({label: "Required Text Input", required: true}), 
 
             NumberInput({label: "Number Input", note: "pick something awesome"}), 
 
-            UrlInput({label: "Url Input"}), 
+            UrlInput({
+              className: "input-error", 
+              label: "Url Input", 
+              note: "Input Error is not currently a working feature"}), 
             PasswordInput({label: "Password Input"}), 
             PhoneInput({label: "Phone Input"}), 
             EmailInput({label: "Email Input", placeholder: "tyler@orgsync.com"}), 
 
-            TextArea({label: "Text Area"}), 
+            TextArea({label: "Text Area", required: true}), 
 
             React.DOM.hr(null), 
 
             SelectInput({
               value: "2", 
-              label: "Pick a version"}, 
-              React.DOM.option({value: "1"}, "alpha"), 
-              React.DOM.option({value: "2"}, "beta"), 
-              React.DOM.option({value: "3"}, "gamma")
+              label: "Pick a version", 
+              note: "You can only pick one."}, 
+              React.DOM.option({value: "1"}, "Alpha"), 
+              React.DOM.option({value: "2"}, "Beta"), 
+              React.DOM.option({value: "3"}, "Gamma"), 
+              React.DOM.option({value: "4"}, "Delta"), 
+              React.DOM.option({value: "5"}, "Iota")
             ), 
 
             React.DOM.hr(null), 
 
             QuestionGroup({
-              question: "Pick your favorite color?", 
-              note: "pick one or many"}, 
-              CheckboxInput({name: "color", label: "blue"}), 
-              CheckboxInput({name: "color", label: "red"})
+              question: "What colors do you prefer?", 
+              note: "Pick as many as you would like"}, 
+              CheckboxInput({name: "color", label: "Blue"}), 
+              CheckboxInput({name: "color", label: "Red"}), 
+              CheckboxInput({name: "color", label: "Green"}), 
+              CheckboxInput({name: "color", label: "Orange"})
             ), 
 
             React.DOM.hr(null), 
@@ -310,8 +327,8 @@ define(
             React.DOM.hr(null), 
 
             QuestionGroup({
-              question: "do you agree to this?", 
-              required: "true"}, 
+              question: "Do you agree to this?", 
+              required: true}, 
               RadioInput({name: "agreement", label: "Yes"}), 
               RadioInput({name: "agreement", label: "No"})
             ), 

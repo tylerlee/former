@@ -17,7 +17,11 @@ dd{
 }
 
 dl, .form-checkbox{
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+dl .form-checkbox{
+  margin-bottom: 0;
 }
 
 label, p{
@@ -54,17 +58,26 @@ input[type="url"],
 input[type="email"],
 input[type="number"],
 input[type="password"]{
-  border: 1px solid #dedede;
+  border: 1px solid #aaa;
   border-radius: 3px;
   max-width: 400px;
   padding: 8px;
   width: 100%;
 }
 
+input[disabled]{
+  background: #f4f4f4;
+  border: 1px solid #ccc;
+}
+
+input.input-error{
+  border: 1px solid red;
+}
+
 
 hr{
   border: 0;
   border-top: 1px solid #ccc;
-  margin: 2rem 0;
+  margin: 0 0 2rem 0;
 }
 
