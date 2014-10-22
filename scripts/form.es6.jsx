@@ -6,7 +6,7 @@ import React from 'react';
 var Form = React.createClass({
   render: function() {
     return(
-      <form action={this.props.action}>
+      <form action={this.props.action} onSubmit={this.props.onSubmit}>
         {this.props.children}
       </form>
     );
@@ -21,7 +21,7 @@ var Submit = React.createClass({
   }
 });
 
-var ElementWrapper = React.createClass({
+var Element = React.createClass({
   renderNote: function(){
     if(this.props.note) return <p className='note'>{this.props.note}</p>;
   },
@@ -42,12 +42,12 @@ var ElementWrapper = React.createClass({
 var BasicInput = React.createClass({
   render: function() {
     return (
-      <ElementWrapper
+      <Element
         label={this.props.label}
         note={this.props.note}
         required={this.props.required}>
         <input {..._.omit(this.props, 'label note')} />
-      </ElementWrapper>
+      </Element>
     );
   }
 });
@@ -55,12 +55,12 @@ var BasicInput = React.createClass({
 var TextArea = React.createClass({
   render: function() {
     return(
-      <ElementWrapper
+      <Element
         label={this.props.label}
         note={this.props.note}
         required={this.props.required}>
         <textarea {..._.omit(this.props, 'label')} />
-      </ElementWrapper>
+      </Element>
     );
   }
 });
@@ -68,19 +68,19 @@ var TextArea = React.createClass({
 var SelectInput = React.createClass({
   render: function(){
     return (
-      <ElementWrapper
+      <Element
         label={this.props.label}
         note={this.props.note}
         required={this.props.required}>
         <select {..._.omit(this.props, 'label')}>
           {this.props.children}
         </select>
-      </ElementWrapper>
+      </Element>
     );
   }
 });
 
-var CheckboxInput = React.createClass({
+var McInput = React.createClass({
   renderNote: function(){
     if(this.props.note) return <p className='note'>{this.props.note}</p>;
   },
@@ -101,39 +101,29 @@ var CheckboxInput = React.createClass({
   }
 });
 
-var RadioInput = React.createClass({
-  renderNote: function(){
-    if(this.props.note) return <p className='note'>{this.props.note}</p>;
-  },
-
-  render: function (){
-    var classes = 'form-checkbox';
-    if (this.props.required){ classes += ' required' }
-    return(
-      <div className={classes}>
-        <label>
-          <input
-            type="radio"
-            {..._.omit(this.props, 'label')} />
-          {this.props.label}
-        </label>
-        {this.renderNote()}
-      </div>
-    );
-  }
-});
-
 var QuestionGroup = React.createClass({
   render: function(){
     return(
-      <ElementWrapper
+      <Element
         label={this.props.question}
         note={this.props.note}
         className='form-checkbox'
         required={this.props.required}>
         {this.props.children}
-      </ElementWrapper>
+      </Element>
     );
+  }
+});
+
+var CheckboxInput = React.createClass({
+  render: function() {
+    return <McInput type="checkbox" {...this.props} />;
+  }
+});
+
+var RadioInput = React.createClass({
+  render: function() {
+    return <McInput type="radio" {...this.props} />;
   }
 });
 
@@ -177,7 +167,7 @@ var EmailInput = React.createClass({
 export default React.createClass({
   render: function () {
     return (
-      <Form action="/test">
+      <Form action="/test" onSubmit={this.handleSubmit}>
         <h1>Sample Form</h1>
         <TextInput label="Text Input" size="50" columns="3"/>
         <TextInput label="Text Input with Placeholder" placeholder="this is some text" columns="3"/>

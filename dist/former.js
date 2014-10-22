@@ -103,7 +103,7 @@ define(
     var Form = React.createClass({displayName: 'Form',
       render: function() {
         return(
-          React.DOM.form({action: this.props.action}, 
+          React.DOM.form({action: this.props.action, onSubmit: this.props.onSubmit}, 
             this.props.children
           )
         );
@@ -118,7 +118,7 @@ define(
       }
     });
 
-    var ElementWrapper = React.createClass({displayName: 'ElementWrapper',
+    var Element = React.createClass({displayName: 'Element',
       renderNote: function(){
         if(this.props.note) return React.DOM.p({className: "note"}, this.props.note);
       },
@@ -139,7 +139,7 @@ define(
     var BasicInput = React.createClass({displayName: 'BasicInput',
       render: function() {
         return (
-          ElementWrapper({
+          Element({
             label: this.props.label, 
             note: this.props.note, 
             required: this.props.required}, 
@@ -152,7 +152,7 @@ define(
     var TextArea = React.createClass({displayName: 'TextArea',
       render: function() {
         return(
-          ElementWrapper({
+          Element({
             label: this.props.label, 
             note: this.props.note, 
             required: this.props.required}, 
@@ -165,7 +165,7 @@ define(
     var SelectInput = React.createClass({displayName: 'SelectInput',
       render: function(){
         return (
-          ElementWrapper({
+          Element({
             label: this.props.label, 
             note: this.props.note, 
             required: this.props.required}, 
@@ -177,7 +177,7 @@ define(
       }
     });
 
-    var CheckboxInput = React.createClass({displayName: 'CheckboxInput',
+    var McInput = React.createClass({displayName: 'McInput',
       renderNote: function(){
         if(this.props.note) return React.DOM.p({className: "note"}, this.props.note);
       },
@@ -197,31 +197,10 @@ define(
       }
     });
 
-    var RadioInput = React.createClass({displayName: 'RadioInput',
-      renderNote: function(){
-        if(this.props.note) return React.DOM.p({className: "note"}, this.props.note);
-      },
-
-      render: function (){
-        var classes = 'form-checkbox';
-        if (this.props.required){ classes += ' required' }
-        return(
-          React.DOM.div({className: classes}, 
-            React.DOM.label(null, 
-              React.DOM.input(Object.assign({
-                type: "radio"}, _.omit(this.props, 'label'))), 
-              this.props.label
-            ), 
-            this.renderNote()
-          )
-        );
-      }
-    });
-
     var QuestionGroup = React.createClass({displayName: 'QuestionGroup',
       render: function(){
         return(
-          ElementWrapper({
+          Element({
             label: this.props.question, 
             note: this.props.note, 
             className: "form-checkbox", 
@@ -229,6 +208,18 @@ define(
             this.props.children
           )
         );
+      }
+    });
+
+    var CheckboxInput = React.createClass({displayName: 'CheckboxInput',
+      render: function() {
+        return McInput(Object.assign({type: "checkbox"}, this.props));
+      }
+    });
+
+    var RadioInput = React.createClass({displayName: 'RadioInput',
+      render: function() {
+        return McInput(Object.assign({type: "radio"}, this.props));
       }
     });
 
@@ -272,7 +263,7 @@ define(
     __exports__["default"] = React.createClass({
       render: function () {
         return (
-          Form({action: "/test"}, 
+          Form({action: "/test", onSubmit: this.handleSubmit}, 
             React.DOM.h1(null, "Sample Form"), 
             TextInput({label: "Text Input", size: "50", columns: "3"}), 
             TextInput({label: "Text Input with Placeholder", placeholder: "this is some text", columns: "3"}), 
