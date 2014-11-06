@@ -7,8 +7,8 @@
     "url": "https://github.com/tylerlee/former"
   },
   "devDependencies": {
-    "cogs": "0.26.0",
+    "cogs": "0.26.2",
     "es6-module-transpiler": "0.4.0",
-    "react-tools": "0.11.2"
+    "react-tools": "0.12.0"
   }
 }

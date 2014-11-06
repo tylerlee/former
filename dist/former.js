@@ -1,12 +1,16 @@
 ((function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define(['react', 'cursors'], factory);
+    define(['underscore', 'react', 'cursors'], factory);
   } else if (typeof exports !== 'undefined') {
-    module.exports = factory(require('react'), require('cursors'));
+    module.exports = factory(
+      require('underscore'),
+      require('react'),
+      require('cursors')
+    );
   } else {
-    root.former = factory(root.React, root.Cursors);
+    root.former = factory(root._, root.React, root.Cursors);
   }
-})(this, function (React, Cursors) {
+})(this, function (_, React, Cursors) {
 // bower_components/amdainty/amdainty.js
 var define;
 var require;
@@ -72,6 +76,22 @@ var require;
   };
 })();
 
+// scripts/underscore.es6
+define(
+  'underscore', ["exports"],
+  function(__exports__) {
+    "use strict";
+    __exports__["default"] = _;
+  });
+
+// scripts/cursors.es6
+define(
+  'cursors', ["exports"],
+  function(__exports__) {
+    "use strict";
+    __exports__["default"] = Cursors;
+  });
+
 // scripts/react.es6
 define(
   'react', ["exports"],
@@ -80,115 +100,93 @@ define(
     __exports__["default"] = React;
   });
 
-// scripts/underscore.es6
+// scripts/components/element.es6.jsx
 define(
-  'underscore', ["exports"],
-  function(__exports__) {
-    "use strict";
-    if (!Object.assign) Object.assign = _.extend;
-
-    __exports__["default"] = _;
-  });
-
-// scripts/form.es6.jsx
-define(
-  'form', ["underscore","react","exports"],
+  'components/element', ["cursors","react","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
-    /** @jsx React.DOM */
-
-    var _ = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency1__["default"] || __dependency1__;
     var React = __dependency2__["default"] || __dependency2__;
 
-    var Form = React.createClass({displayName: 'Form',
-      render: function() {
-        return(
-          React.DOM.form({action: this.props.action, onSubmit: this.props.onSubmit}, 
-            this.props.children
-          )
-        );
-      }
-    });
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
 
-    var Submit = React.createClass({displayName: 'Submit',
-      render: function() {
-        return(
-          React.DOM.input(Object.assign({type: "submit"}, this.props))
-        );
-      }
-    });
-
-    var Element = React.createClass({displayName: 'Element',
-      renderNote: function(){
-        if(this.props.note) return React.DOM.p({className: "note"}, this.props.note);
+      getClassName: function () {
+        var classes = ['form'];
+        if (this.props.required) classes.push('required');
+        return classes.join(' ');
       },
 
-      render: function() {
-        var classes = 'form';
-        if (this.props.required){ classes += ' required' }
-        return(
-          React.DOM.dl({className: classes}, 
-            React.DOM.dt(null, React.DOM.label(null, this.props.label)), 
+      renderNote: function () {
+        if (this.props.note) return React.createElement("p", {className: "note"}, this.props.note);
+      },
+
+      render: function () {
+        return (
+          React.createElement("dl", {className: this.getClassName()}, 
+            React.createElement("dt", null, React.createElement("label", null, this.props.label)), 
             this.renderNote(), 
-            React.DOM.dd(null, this.props.children)
+            React.createElement("dd", null, this.props.children)
           )
         );
       }
     });
+  });
 
-    var BasicInput = React.createClass({displayName: 'BasicInput',
+// scripts/components/basic-input.es6.jsx
+define(
+  'components/basic-input', ["underscore","cursors","components/element","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    "use strict";
+    var _ = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var Element = __dependency3__["default"] || __dependency3__;
+    var React = __dependency4__["default"] || __dependency4__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
       render: function() {
         return (
-          Element({
+          React.createElement(Element, {
             label: this.props.label, 
             note: this.props.note, 
-            required: this.props.required}, 
-            React.DOM.input(Object.assign({}, _.omit(this.props, 'label note')))
+            required: this.props.required
+          }, 
+            React.createElement("input", React.__spread({},  _.omit(this.props, 'label', 'note')))
           )
         );
       }
     });
+  });
 
-    var TextArea = React.createClass({displayName: 'TextArea',
-      render: function() {
-        return(
-          Element({
-            label: this.props.label, 
-            note: this.props.note, 
-            required: this.props.required}, 
-            React.DOM.textarea(Object.assign({}, _.omit(this.props, 'label')))
-          )
-        );
-      }
-    });
+// scripts/components/mc-input.es6.jsx
+define(
+  'components/mc-input', ["underscore","cursors","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var _ = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
 
-    var SelectInput = React.createClass({displayName: 'SelectInput',
-      render: function(){
-        return (
-          Element({
-            label: this.props.label, 
-            note: this.props.note, 
-            required: this.props.required}, 
-            React.DOM.select(Object.assign({}, _.omit(this.props, 'label')), 
-              this.props.children
-            )
-          )
-        );
-      }
-    });
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
 
-    var McInput = React.createClass({displayName: 'McInput',
-      renderNote: function(){
-        if(this.props.note) return React.DOM.p({className: "note"}, this.props.note);
+      getClassName: function () {
+        var classes = ['form-checkbox'];
+        if (this.props.required) classes.push('required');
+        return classes.join(' ');
       },
-      render: function (){
-        var classes = 'form-checkbox';
-        if (this.props.required){ classes += ' required' }
-        return(
-          React.DOM.div({className: classes}, 
-            React.DOM.label(null, 
-              React.DOM.input(Object.assign({
-                type: "checkbox"}, _.omit(this.props, 'label'))), 
+
+      renderNote: function () {
+        if (this.props.note) return React.createElement("p", {className: "note"}, this.props.note);
+      },
+
+      render: function () {
+        return (
+          React.createElement("div", {className: this.getClassName()}, 
+            React.createElement("label", null, 
+              React.createElement("input", React.__spread({type: "checkbox"},  _.omit(this.props, 'label'))), 
               this.props.label
             ), 
             this.renderNote()
@@ -196,156 +194,317 @@ define(
         );
       }
     });
+  });
 
-    var QuestionGroup = React.createClass({displayName: 'QuestionGroup',
-      render: function(){
-        return(
-          Element({
-            label: this.props.question, 
-            note: this.props.note, 
-            className: "form-checkbox", 
-            required: this.props.required}, 
-            this.props.children
-          )
-        );
-      }
-    });
-
-    var CheckboxInput = React.createClass({displayName: 'CheckboxInput',
-      render: function() {
-        return McInput(Object.assign({type: "checkbox"}, this.props));
-      }
-    });
-
-    var RadioInput = React.createClass({displayName: 'RadioInput',
-      render: function() {
-        return McInput(Object.assign({type: "radio"}, this.props));
-      }
-    });
-
-    var TextInput = React.createClass({displayName: 'TextInput',
-      render: function() {
-        return BasicInput(Object.assign({type: "text"}, this.props));
-      }
-    });
-
-    var NumberInput = React.createClass({displayName: 'NumberInput',
-      render: function() {
-        return BasicInput(Object.assign({type: "number"}, this.props));
-      }
-    });
-
-    var UrlInput = React.createClass({displayName: 'UrlInput',
-      render: function() {
-        return BasicInput(Object.assign({type: "url"}, this.props));
-      }
-    });
-
-    var PasswordInput = React.createClass({displayName: 'PasswordInput',
-      render: function() {
-        return BasicInput(Object.assign({type: "password"}, this.props));
-      }
-    });
-
-    var PhoneInput = React.createClass({displayName: 'PhoneInput',
-      render: function() {
-        return BasicInput(Object.assign({type: "tel"}, this.props));
-      }
-    });
-
-    var EmailInput = React.createClass({displayName: 'EmailInput',
-      render: function() {
-        return BasicInput(Object.assign({type: "email"}, this.props));
-      }
-    });
-
+// scripts/components/checkbox-input.es6.jsx
+define(
+  'components/checkbox-input', ["cursors","components/mc-input","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var Cursors = __dependency1__["default"] || __dependency1__;
+    var McInput = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
 
     __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return React.createElement(McInput, React.__spread({},  this.props, {type: "checkbox"}));
+      }
+    });
+  });
+
+// scripts/components/email-input.es6.jsx
+define(
+  'components/email-input', ["components/basic-input","cursors","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var BasicInput = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return React.createElement(BasicInput, React.__spread({},  this.props, {type: "email"}));
+      }
+    });
+  });
+
+// scripts/components/form.es6.jsx
+define(
+  'components/form', ["cursors","react","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
+    "use strict";
+    var Cursors = __dependency1__["default"] || __dependency1__;
+    var React = __dependency2__["default"] || __dependency2__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
       render: function () {
         return (
-          Form({action: "/test", onSubmit: this.handleSubmit}, 
-            React.DOM.h1(null, "Sample Form"), 
-            TextInput({label: "Text Input", size: "50", columns: "3"}), 
-            TextInput({label: "Text Input with Placeholder", placeholder: "this is some text", columns: "3"}), 
-            TextInput({label: "Disabled Text Input", disabled: true}), 
-            TextInput({label: "Required Text Input", required: true}), 
-
-            NumberInput({label: "Number Input", note: "pick something awesome"}), 
-
-            UrlInput({
-              className: "input-error", 
-              label: "Url Input", 
-              note: "Input Error is not currently a working feature"}), 
-            PasswordInput({label: "Password Input"}), 
-            PhoneInput({label: "Phone Input"}), 
-            EmailInput({label: "Email Input", placeholder: "tyler@orgsync.com"}), 
-
-            TextArea({label: "Text Area", required: true}), 
-
-            React.DOM.hr(null), 
-
-            SelectInput({
-              value: "2", 
-              label: "Pick a version", 
-              note: "You can only pick one."}, 
-              React.DOM.option({value: "1"}, "Alpha"), 
-              React.DOM.option({value: "2"}, "Beta"), 
-              React.DOM.option({value: "3"}, "Gamma"), 
-              React.DOM.option({value: "4"}, "Delta"), 
-              React.DOM.option({value: "5"}, "Iota")
-            ), 
-
-            React.DOM.hr(null), 
-
-            QuestionGroup({
-              question: "What colors do you prefer?", 
-              note: "Pick as many as you would like"}, 
-              CheckboxInput({name: "color", label: "Blue"}), 
-              CheckboxInput({name: "color", label: "Red"}), 
-              CheckboxInput({name: "color", label: "Green"}), 
-              CheckboxInput({name: "color", label: "Orange"})
-            ), 
-
-            React.DOM.hr(null), 
-
-            RadioInput({
-              label: "Single Radio", 
-              note: "this here is a note about this radio button"}), 
-            CheckboxInput({
-              label: "Single Checkbox", 
-              note: "this here is a note about this checkbox"}), 
-
-            React.DOM.hr(null), 
-
-            QuestionGroup({
-              question: "Do you agree to this?", 
-              required: true}, 
-              RadioInput({name: "agreement", label: "Yes"}), 
-              RadioInput({name: "agreement", label: "No"})
-            ), 
-
-            Submit(null)
+          React.createElement("form", {action: this.props.action, onSubmit: this.props.onSubmit}, 
+            this.props.children
           )
         );
       }
     });
   });
 
+// scripts/components/number-input.es6.jsx
+define(
+  'components/number-input', ["components/basic-input","cursors","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var BasicInput = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return React.createElement(BasicInput, React.__spread({},  this.props, {type: "number"}));
+      }
+    });
+  });
+
+// scripts/components/password-input.es6.jsx
+define(
+  'components/password-input', ["components/basic-input","cursors","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var BasicInput = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return React.createElement(BasicInput, React.__spread({},  this.props, {type: "password"}));
+      }
+    });
+  });
+
+// scripts/components/phone-input.es6.jsx
+define(
+  'components/phone-input', ["components/basic-input","cursors","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var BasicInput = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return React.createElement(BasicInput, React.__spread({},  this.props, {type: "tel"}));
+      }
+    });
+  });
+
+// scripts/components/question-group.es6.jsx
+define(
+  'components/question-group', ["cursors","components/element","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var Cursors = __dependency1__["default"] || __dependency1__;
+    var Element = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function(){
+        return(
+          React.createElement(Element, {
+            label: this.props.question, 
+            note: this.props.note, 
+            className: "form-checkbox", 
+            required: this.props.required
+          }, 
+            this.props.children
+          )
+        );
+      }
+    });
+  });
+
+// scripts/components/radio-input.es6.jsx
+define(
+  'components/radio-input', ["cursors","components/mc-input","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var Cursors = __dependency1__["default"] || __dependency1__;
+    var McInput = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return React.createElement(McInput, React.__spread({},  this.props, {type: "radio"}));
+      }
+    });
+  });
+
+// scripts/components/select-input.es6.jsx
+define(
+  'components/select-input', ["underscore","cursors","components/element","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    "use strict";
+    var _ = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var Element = __dependency3__["default"] || __dependency3__;
+    var React = __dependency4__["default"] || __dependency4__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return (
+          React.createElement(Element, {
+            label: this.props.label, 
+            note: this.props.note, 
+            required: this.props.required
+          }, 
+            React.createElement("select", React.__spread({},  _.omit(this.props, 'label')), 
+              this.props.children
+            )
+          )
+        );
+      }
+    });
+  });
+
+// scripts/components/submit.es6.jsx
+define(
+  'components/submit', ["cursors","react","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
+    "use strict";
+    var Cursors = __dependency1__["default"] || __dependency1__;
+    var React = __dependency2__["default"] || __dependency2__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return React.createElement("input", React.__spread({type: "submit"},  this.props));
+      }
+    });
+  });
+
+// scripts/components/text-area.es6.jsx
+define(
+  'components/text-area', ["underscore","cursors","components/element","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    "use strict";
+    var _ = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var Element = __dependency3__["default"] || __dependency3__;
+    var React = __dependency4__["default"] || __dependency4__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return (
+          React.createElement(Element, {
+            label: this.props.label, 
+            note: this.props.note, 
+            required: this.props.required
+          }, 
+            React.createElement("textarea", React.__spread({},  _.omit(this.props, 'label')))
+          )
+        );
+      }
+    });
+  });
+
+// scripts/components/text-input.es6.jsx
+define(
+  'components/text-input', ["components/basic-input","cursors","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var BasicInput = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return React.createElement(BasicInput, React.__spread({},  this.props, {type: "text"}));
+      }
+    });
+  });
+
+// scripts/components/url-input.es6.jsx
+define(
+  'components/url-input', ["components/basic-input","cursors","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var BasicInput = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors],
+
+      render: function () {
+        return React.createElement(BasicInput, React.__spread({},  this.props, {type: "url"}));
+      }
+    });
+  });
+
 // scripts/former.es6
 define(
-  'former', ["react","form","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  'former', ["components/basic-input","components/checkbox-input","components/element","components/email-input","components/form","components/mc-input","components/number-input","components/password-input","components/phone-input","components/question-group","components/radio-input","components/select-input","components/submit","components/text-area","components/text-input","components/url-input","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __dependency16__, __exports__) {
     "use strict";
 
 
 
 
 
-    var React = __dependency1__["default"] || __dependency1__;
-    var Form = __dependency2__["default"] || __dependency2__;
 
-    var Form = Form;
+    var BasicInput = __dependency1__["default"] || __dependency1__;
+    var CheckboxInput = __dependency2__["default"] || __dependency2__;
+    var Element = __dependency3__["default"] || __dependency3__;
+    var EmailInput = __dependency4__["default"] || __dependency4__;
+    var Form = __dependency5__["default"] || __dependency5__;
+    var McInput = __dependency6__["default"] || __dependency6__;
+    var NumberInput = __dependency7__["default"] || __dependency7__;
+    var PasswordInput = __dependency8__["default"] || __dependency8__;
+    var PhoneInput = __dependency9__["default"] || __dependency9__;
+    var QuestionGroup = __dependency10__["default"] || __dependency10__;
+    var RadioInput = __dependency11__["default"] || __dependency11__;
+    var SelectInput = __dependency12__["default"] || __dependency12__;
+    var Submit = __dependency13__["default"] || __dependency13__;
+    var TextArea = __dependency14__["default"] || __dependency14__;
+    var TextInput = __dependency15__["default"] || __dependency15__;
+    var UrlInput = __dependency16__["default"] || __dependency16__;
+
+    __exports__.BasicInput = BasicInput;
+    __exports__.CheckboxInput = CheckboxInput;
+    __exports__.Element = Element;
+    __exports__.EmailInput = EmailInput;
     __exports__.Form = Form;
+    __exports__.McInput = McInput;
+    __exports__.NumberInput = NumberInput;
+    __exports__.PasswordInput = PasswordInput;
+    __exports__.PhoneInput = PhoneInput;
+    __exports__.QuestionGroup = QuestionGroup;
+    __exports__.RadioInput = RadioInput;
+    __exports__.SelectInput = SelectInput;
+    __exports__.Submit = Submit;
+    __exports__.TextArea = TextArea;
+    __exports__.TextInput = TextInput;
+    __exports__.UrlInput = UrlInput;
   });
 
 return require('former');

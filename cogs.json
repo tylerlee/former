@@ -5,6 +5,7 @@
     "processors.es6.options.compatFix": true
   },
   "targets": {
-    "scripts/former.es6": "dist"
+    "scripts/former.es6": "dist",
+    "examples/index.jsx": "examples"
   }
 }

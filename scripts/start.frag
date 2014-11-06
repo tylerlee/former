@@ -1,9 +1,13 @@
 ((function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define(['react', 'cursors'], factory);
+    define(['underscore', 'react', 'cursors'], factory);
   } else if (typeof exports !== 'undefined') {
-    module.exports = factory(require('react'), require('cursors'));
+    module.exports = factory(
+      require('underscore'),
+      require('react'),
+      require('cursors')
+    );
   } else {
-    root.former = factory(root.React, root.Cursors);
+    root.former = factory(root._, root.React, root.Cursors);
   }
-})(this, function (React, Cursors) {
+})(this, function (_, React, Cursors) {
