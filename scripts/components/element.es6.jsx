@@ -14,10 +14,14 @@ export default React.createClass({
     if (this.props.note) return <p className='note'>{this.props.note}</p>;
   },
 
+  renderLabel: function () {
+    if (this.props.label) return <dt><label>{this.props.label}</label></dt>;
+  },
+
   render: function () {
     return (
       <dl className={this.getClassName()}>
-        <dt><label>{this.props.label}</label></dt>
+        {this.renderLabel()}
         {this.renderNote()}
         <dd>{this.props.children}</dd>
       </dl>
