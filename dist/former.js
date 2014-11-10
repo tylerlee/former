@@ -121,10 +121,14 @@ define(
         if (this.props.note) return React.createElement("p", {className: "note"}, this.props.note);
       },
 
+      renderLabel: function () {
+        if (this.props.label) return React.createElement("dt", null, React.createElement("label", null, this.props.label));
+      },
+
       render: function () {
         return (
           React.createElement("dl", {className: this.getClassName()}, 
-            React.createElement("dt", null, React.createElement("label", null, this.props.label)), 
+            this.renderLabel(), 
             this.renderNote(), 
             React.createElement("dd", null, this.props.children)
           )
