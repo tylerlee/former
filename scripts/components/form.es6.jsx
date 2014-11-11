@@ -6,7 +6,9 @@ export default React.createClass({
 
   render: function () {
     return (
-      <form action={this.props.action} onSubmit={this.props.onSubmit}>
+      <form action={this.props.action}
+        method={this.props.method}
+        onSubmit={this.props.onSubmit}>
         {this.props.children}
       </form>
     );

@@ -7,7 +7,6 @@ React.render(React.createFactory(React.createClass({
     return (
       React.createElement(f.Form, {action: "/test", onSubmit: this.handleSubmit}, 
         React.createElement("h1", null, "Sample Form"), 
-        React.createElement(f.TextInput, {name: "test", size: "50", columns: "3"}), 
         React.createElement(f.TextInput, {label: "Text Input", size: "50", columns: "3"}), 
         React.createElement(f.TextInput, {label: "Text Input with Placeholder", placeholder: "this is some text", columns: "3"}), 
         React.createElement(f.TextInput, {label: "Disabled Text Input", disabled: true}), 

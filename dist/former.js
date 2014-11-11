@@ -249,7 +249,9 @@ define(
 
       render: function () {
         return (
-          React.createElement("form", {action: this.props.action, onSubmit: this.props.onSubmit}, 
+          React.createElement("form", {action: this.props.action, 
+            method: this.props.method, 
+            onSubmit: this.props.onSubmit}, 
             this.props.children
           )
         );
