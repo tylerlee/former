@@ -137,18 +137,35 @@ define(
     });
   });
 
+// scripts/mixins/value-bind.es6
+define(
+  'mixins/value-bind', ["exports"],
+  function(__exports__) {
+    "use strict";
+    __exports__["default"] = {
+      componentDidMount: function () {
+        this.update({value: {$set: this.props.value}});
+      },
+
+      onValueChange: function (ev) {
+        this.update({value: {$set: ev.target.value}});
+      }
+    };
+  });
+
 // scripts/components/basic-input.es6.jsx
 define(
-  'components/basic-input', ["underscore","cursors","components/element","react","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  'components/basic-input', ["underscore","cursors","components/element","react","mixins/value-bind","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     var _ = __dependency1__["default"] || __dependency1__;
     var Cursors = __dependency2__["default"] || __dependency2__;
     var Element = __dependency3__["default"] || __dependency3__;
     var React = __dependency4__["default"] || __dependency4__;
+    var ValueBind = __dependency5__["default"] || __dependency5__;
 
     __exports__["default"] = React.createClass({
-      mixins: [Cursors],
+      mixins: [Cursors, ValueBind],
 
       render: function() {
         return (
@@ -157,7 +174,11 @@ define(
             note: this.props.note, 
             required: this.props.required
           }, 
-            React.createElement("input", React.__spread({},  _.omit(this.props, 'label', 'note')))
+            React.createElement("input", React.__spread({}, 
+              _.omit(this.props, 'label', 'note'), 
+              {value: this.state.value, 
+              onChange: this.onValueChange})
+            )
           )
         );
       }
@@ -166,15 +187,16 @@ define(
 
 // scripts/components/mc-input.es6.jsx
 define(
-  'components/mc-input', ["underscore","cursors","react","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  'components/mc-input', ["underscore","cursors","react","mixins/value-bind","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     var _ = __dependency1__["default"] || __dependency1__;
     var Cursors = __dependency2__["default"] || __dependency2__;
     var React = __dependency3__["default"] || __dependency3__;
+    var ValueBind = __dependency4__["default"] || __dependency4__;
 
     __exports__["default"] = React.createClass({
-      mixins: [Cursors],
+      mixins: [Cursors, ValueBind],
 
       getClassName: function () {
         var classes = ['form-checkbox'];
@@ -190,7 +212,12 @@ define(
         return (
           React.createElement("div", {className: this.getClassName()}, 
             React.createElement("label", null, 
-              React.createElement("input", React.__spread({type: "checkbox"},  _.omit(this.props, 'label'))), 
+              React.createElement("input", React.__spread({
+                type: "checkbox"}, 
+                _.omit(this.props, 'label'), 
+                {value: this.state.value, 
+                onChange: this.onValueChange})
+              ), 
               this.props.label
             ), 
             this.renderNote()
@@ -238,25 +265,68 @@ define(
 
 // scripts/components/form.es6.jsx
 define(
-  'components/form', ["cursors","react","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  'components/form', ["underscore","cursors","react","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
-    var Cursors = __dependency1__["default"] || __dependency1__;
-    var React = __dependency2__["default"] || __dependency2__;
+    var _ = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var React = __dependency3__["default"] || __dependency3__;
+
+    var cloneWithProps = React.addons.cloneWithProps;
 
     __exports__["default"] = React.createClass({
       mixins: [Cursors],
+
+      getDefaultProps: function () {
+        return {
+          value: {}
+        };
+      },
+
+      getInitialState: function () {
+        return {
+          value: this.props.value
+        };
+      },
+
+      componentDidUpdate: function () {
+        console.log(JSON.stringify(this.state, null, 2));
+      },
+
+      renderChild: function (component) {
+        if (!component.props) return component;
+        var cursors = {};
+        if (_.has(component.props, 'name')) {
+          cursors = component.props.cursors || {};
+          cursors.value = this.getCursor('value', component.props.name);
+        }
+        return cloneWithProps(component, {
+          children: this.renderChildren(component),
+          cursors: cursors,
+          key: component.key || void 0,
+          ref: component.ref || void 0
+        });
+      },
+
+      renderChildren: function (component) {
+        if (!component.props) return component;
+        return React.Children.map(component.props.children, this.renderChild);
+      },
 
       render: function () {
         return (
           React.createElement("form", {action: this.props.action, 
             method: this.props.method, 
             onSubmit: this.props.onSubmit}, 
-            this.props.children
+            this.renderChildren(this)
           )
         );
       }
     });
+
+    // <former.Form>
+
+    // </former.Form>
   });
 
 // scripts/components/number-input.es6.jsx
@@ -360,16 +430,17 @@ define(
 
 // scripts/components/select-input.es6.jsx
 define(
-  'components/select-input', ["underscore","cursors","components/element","react","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  'components/select-input', ["underscore","cursors","components/element","react","mixins/value-bind","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     var _ = __dependency1__["default"] || __dependency1__;
     var Cursors = __dependency2__["default"] || __dependency2__;
     var Element = __dependency3__["default"] || __dependency3__;
     var React = __dependency4__["default"] || __dependency4__;
+    var ValueBind = __dependency5__["default"] || __dependency5__;
 
     __exports__["default"] = React.createClass({
-      mixins: [Cursors],
+      mixins: [Cursors, ValueBind],
 
       render: function () {
         return (
@@ -378,7 +449,10 @@ define(
             note: this.props.note, 
             required: this.props.required
           }, 
-            React.createElement("select", React.__spread({},  _.omit(this.props, 'label')), 
+            React.createElement("select", React.__spread({}, 
+              _.omit(this.props, 'label'), 
+              {value: this.state.value, 
+              onChange: this.onValueChange}), 
               this.props.children
             )
           )
@@ -406,16 +480,17 @@ define(
 
 // scripts/components/text-area.es6.jsx
 define(
-  'components/text-area', ["underscore","cursors","components/element","react","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  'components/text-area', ["underscore","cursors","components/element","react","mixins/value-bind","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     var _ = __dependency1__["default"] || __dependency1__;
     var Cursors = __dependency2__["default"] || __dependency2__;
     var Element = __dependency3__["default"] || __dependency3__;
     var React = __dependency4__["default"] || __dependency4__;
+    var ValueBind = __dependency5__["default"] || __dependency5__;
 
     __exports__["default"] = React.createClass({
-      mixins: [Cursors],
+      mixins: [Cursors, ValueBind],
 
       render: function () {
         return (
@@ -424,7 +499,11 @@ define(
             note: this.props.note, 
             required: this.props.required
           }, 
-            React.createElement("textarea", React.__spread({},  _.omit(this.props, 'label')))
+            React.createElement("textarea", React.__spread({}, 
+              _.omit(this.props, 'label'), 
+              {value: this.state.value, 
+              onChange: this.onValueChange})
+            )
           )
         );
       }

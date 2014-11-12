@@ -21,11 +21,12 @@ React.render(React.createFactory(React.createClass({
         <f.PhoneInput label='Phone Input' />
         <f.EmailInput label='Email Input' placeholder='tyler@orgsync.com' />
 
-        <f.TextArea label='Text Area' required={true}/>
+        <f.TextArea name='text-stuff' label='Text Area' required={true}/>
 
         <hr />
 
         <f.SelectInput
+          name='version'
           value='2'
           label='Pick a version'
           note='You can only pick one.'>

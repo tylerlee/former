@@ -1,9 +1,10 @@
 import _ from 'underscore';
 import Cursors from 'cursors';
 import React from 'react';
+import ValueBind from 'mixins/value-bind';
 
 export default React.createClass({
-  mixins: [Cursors],
+  mixins: [Cursors, ValueBind],
 
   getClassName: function () {
     var classes = ['form-checkbox'];
@@ -19,7 +20,12 @@ export default React.createClass({
     return (
       <div className={this.getClassName()}>
         <label>
-          <input type='checkbox' {..._.omit(this.props, 'label')} />
+          <input
+            type='checkbox'
+            {..._.omit(this.props, 'label')}
+            value={this.state.value}
+            onChange={this.onValueChange}
+          />
           {this.props.label}
         </label>
         {this.renderNote()}
