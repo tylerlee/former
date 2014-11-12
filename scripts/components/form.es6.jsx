@@ -9,26 +9,27 @@ export default React.createClass({
 
   getDefaultProps: function () {
     return {
-      value: {}
+      value: {},
+      error: {}
     };
   },
 
   getInitialState: function () {
     return {
-      value: this.props.value
+      value: this.props.value,
+      error: this.props.error
     };
   },
 
-  componentDidUpdate: function () {
-    console.log(JSON.stringify(this.state, null, 2));
-  },
-
   renderChild: function (component) {
-    if (!component.props) return component;
-    var cursors = {};
-    if (_.has(component.props, 'name')) {
-      cursors = component.props.cursors || {};
-      cursors.value = this.getCursor('value', component.props.name);
+    var props = component.props;
+    if (!props) return component;
+    var cursors = props.cursors;
+    if (_.has(props, 'name')) {
+      cursors = _.extend({}, cursors, {
+        value: this.getCursor('value', props.name),
+        error: this.getCursor('error', props.name)
+      });
     }
     return cloneWithProps(component, {
       children: this.renderChildren(component),
