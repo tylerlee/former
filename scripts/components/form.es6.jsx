@@ -54,7 +54,3 @@ export default React.createClass({
     );
   }
 });
-
-// <former.Form>
-
-// </former.Form>

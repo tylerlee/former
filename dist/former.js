@@ -324,10 +324,6 @@ define(
         );
       }
     });
-
-    // <former.Form>
-
-    // </former.Form>
   });
 
 // scripts/components/number-input.es6.jsx
