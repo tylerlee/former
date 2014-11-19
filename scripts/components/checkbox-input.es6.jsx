@@ -1,11 +1,25 @@
 import Cursors from 'cursors';
-import McInput from 'components/mc-input';
 import React from 'react';
+import ValueBind from 'mixins/value-bind';
 
 export default React.createClass({
-  mixins: [Cursors],
+  mixins: [Cursors, ValueBind],
 
   render: function () {
-    return <McInput {...this.props} type='checkbox' />;
+    return (
+      <div className='form-checkbox'>
+        <label>
+          <input
+            name={this.props.name}
+            type='checkbox'
+            value={this.props.value}
+            checked={this.state.value}
+            onChange={this.handleCheckedChange}
+          />
+          {this.props.label}
+        </label>
+        {this.props.note ? <p className='note'>{this.props.note}</p> : null}
+      </div>
+    );
   }
 });

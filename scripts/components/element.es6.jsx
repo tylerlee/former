@@ -18,11 +18,17 @@ export default React.createClass({
     if (this.props.label) return <dt><label>{this.props.label}</label></dt>;
   },
 
+  renderError: function () {
+    var error = this.props.error;
+    if (error) return <div className='error'>{error}</div>;
+  },
+
   render: function () {
     return (
       <dl className={this.getClassName()}>
         {this.renderLabel()}
         {this.renderNote()}
+        {this.renderError()}
         <dd>{this.props.children}</dd>
       </dl>
     );

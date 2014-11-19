@@ -15,8 +15,10 @@ React.render(React.createFactory(React.createClass({
         React.createElement(f.NumberInput, {label: "Number Input", note: "pick something awesome"}), 
 
         React.createElement(f.UrlInput, {
-          className: "input-error", 
+          name: "my_url", 
+          error: "nope", 
           label: "Url Input", 
+          value: "wut", 
           note: "Input Error is not currently a working feature"}), 
         React.createElement(f.PasswordInput, {label: "Password Input"}), 
         React.createElement(f.PhoneInput, {label: "Phone Input"}), 
@@ -30,12 +32,14 @@ React.render(React.createFactory(React.createClass({
           name: "version", 
           value: "2", 
           label: "Pick a version", 
-          note: "You can only pick one."}, 
-          React.createElement("option", {value: "1"}, "Alpha"), 
-          React.createElement("option", {value: "2"}, "Beta"), 
-          React.createElement("option", {value: "3"}, "Gamma"), 
-          React.createElement("option", {value: "4"}, "Delta"), 
-          React.createElement("option", {value: "5"}, "Iota")
+          note: "You can only pick one.", 
+          options: {
+            '1': 'Alpha',
+            '2': 'Beta',
+            '3': 'Gamma',
+            '4': 'Delta',
+            '5': 'Iota'
+          }}
         ), 
 
         React.createElement("hr", null), 
@@ -43,10 +47,10 @@ React.render(React.createFactory(React.createClass({
         React.createElement(f.QuestionGroup, {
           question: "What colors do you prefer?", 
           note: "Pick as many as you would like"}, 
-          React.createElement(f.CheckboxInput, {name: "color", label: "Blue"}), 
-          React.createElement(f.CheckboxInput, {name: "color", label: "Red"}), 
-          React.createElement(f.CheckboxInput, {name: "color", label: "Green"}), 
-          React.createElement(f.CheckboxInput, {name: "color", label: "Orange"})
+          React.createElement(f.CheckboxInput, {name: "color-blue", label: "Blue"}), 
+          React.createElement(f.CheckboxInput, {name: "color-red", label: "Red"}), 
+          React.createElement(f.CheckboxInput, {name: "color-green", label: "Green"}), 
+          React.createElement(f.CheckboxInput, {name: "color-orange", label: "Orange"})
         ), 
 
         React.createElement("hr", null), 
@@ -55,6 +59,7 @@ React.render(React.createFactory(React.createClass({
           label: "Single Radio", 
           note: "this here is a note about this radio button"}), 
         React.createElement(f.CheckboxInput, {
+          value: true, 
           label: "Single Checkbox", 
           note: "this here is a note about this checkbox"}), 
 
@@ -63,8 +68,20 @@ React.render(React.createFactory(React.createClass({
         React.createElement(f.QuestionGroup, {
           question: "Do you agree to this?", 
           required: true}, 
-          React.createElement(f.RadioInput, {name: "agreement", label: "Yes"}), 
-          React.createElement(f.RadioInput, {name: "agreement", label: "No"})
+          React.createElement(f.RadioInput, {
+            value: "no", 
+            name: "agreement", 
+            options: {
+              yes: {
+                label: 'Yes',
+                note: 'You want to do it'
+              },
+              no: {
+                label: 'No',
+                note: 'You cannot has it'
+              }
+            }}
+          )
         ), 
 
         React.createElement(f.Submit, null)

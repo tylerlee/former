@@ -7,17 +7,10 @@ var cloneWithProps = React.addons.cloneWithProps;
 export default React.createClass({
   mixins: [Cursors],
 
-  getDefaultProps: function () {
+  getInitialState: function () {
     return {
       value: {},
       error: {}
-    };
-  },
-
-  getInitialState: function () {
-    return {
-      value: this.props.value,
-      error: this.props.error
     };
   },
 
@@ -46,9 +39,7 @@ export default React.createClass({
 
   render: function () {
     return (
-      <form action={this.props.action}
-        method={this.props.method}
-        onSubmit={this.props.onSubmit}>
+      <form {...this.props}>
         {this.renderChildren(this)}
       </form>
     );

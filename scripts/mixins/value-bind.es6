@@ -1,9 +1,16 @@
 export default {
   componentDidMount: function () {
-    this.update({value: {$set: this.props.value}});
+    this.update({
+      value: {$set: this.props.value},
+      error: {$set: this.props.error}
+    });
   },
 
-  onValueChange: function (ev) {
+  handleValueChange: function (ev) {
     this.update({value: {$set: ev.target.value}});
+  },
+
+  handleCheckedChange: function (ev) {
+    this.update({value: {$set: ev.target.checked}});
   }
 };

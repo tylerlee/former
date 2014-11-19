@@ -9,7 +9,6 @@ import CheckboxInput from 'components/checkbox-input';
 import Element from 'components/element';
 import EmailInput from 'components/email-input';
 import Form from 'components/form';
-import McInput from 'components/mc-input';
 import NumberInput from 'components/number-input';
 import PasswordInput from 'components/password-input';
 import PhoneInput from 'components/phone-input';
@@ -27,7 +26,6 @@ export {
   Element,
   EmailInput,
   Form,
-  McInput,
   NumberInput,
   PasswordInput,
   PhoneInput,

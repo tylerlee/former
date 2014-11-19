@@ -17,7 +17,7 @@ export default React.createClass({
         <textarea
           {..._.omit(this.props, 'label')}
           value={this.state.value}
-          onChange={this.onValueChange}
+          onChange={this.handleValueChange}
         />
       </Element>
     );

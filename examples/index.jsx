@@ -14,8 +14,10 @@ React.render(React.createFactory(React.createClass({
         <f.NumberInput label='Number Input' note='pick something awesome'/>
 
         <f.UrlInput
-          className='input-error'
+          name='my_url'
+          error='nope'
           label='Url Input'
+          value='wut'
           note='Input Error is not currently a working feature'/>
         <f.PasswordInput label='Password Input' />
         <f.PhoneInput label='Phone Input' />
@@ -29,12 +31,14 @@ React.render(React.createFactory(React.createClass({
           name='version'
           value='2'
           label='Pick a version'
-          note='You can only pick one.'>
-          <option value='1'>Alpha</option>
-          <option value='2'>Beta</option>
-          <option value='3'>Gamma</option>
-          <option value='4'>Delta</option>
-          <option value='5'>Iota</option>
+          note='You can only pick one.'
+          options={{
+            '1': 'Alpha',
+            '2': 'Beta',
+            '3': 'Gamma',
+            '4': 'Delta',
+            '5': 'Iota'
+          }}>
         </f.SelectInput>
 
         <hr />
@@ -42,10 +46,10 @@ React.render(React.createFactory(React.createClass({
         <f.QuestionGroup
           question='What colors do you prefer?'
           note='Pick as many as you would like'>
-          <f.CheckboxInput name='color' label='Blue' />
-          <f.CheckboxInput name='color' label='Red' />
-          <f.CheckboxInput name='color' label='Green' />
-          <f.CheckboxInput name='color' label='Orange' />
+          <f.CheckboxInput name='color-blue' label='Blue' />
+          <f.CheckboxInput name='color-red' label='Red' />
+          <f.CheckboxInput name='color-green' label='Green' />
+          <f.CheckboxInput name='color-orange' label='Orange' />
         </f.QuestionGroup>
 
         <hr />
@@ -54,6 +58,7 @@ React.render(React.createFactory(React.createClass({
           label='Single Radio'
           note='this here is a note about this radio button' />
         <f.CheckboxInput
+          value={true}
           label='Single Checkbox'
           note='this here is a note about this checkbox' />
 
@@ -62,8 +67,20 @@ React.render(React.createFactory(React.createClass({
         <f.QuestionGroup
           question='Do you agree to this?'
           required={true}>
-          <f.RadioInput name='agreement' label='Yes' />
-          <f.RadioInput name='agreement' label='No' />
+          <f.RadioInput
+            value='no'
+            name='agreement'
+            options={{
+              yes: {
+                label: 'Yes',
+                note: 'You want to do it'
+              },
+              no: {
+                label: 'No',
+                note: 'You cannot has it'
+              }
+            }}
+          />
         </f.QuestionGroup>
 
         <f.Submit />

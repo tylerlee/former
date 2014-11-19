@@ -125,11 +125,17 @@ define(
         if (this.props.label) return React.createElement("dt", null, React.createElement("label", null, this.props.label));
       },
 
+      renderError: function () {
+        var error = this.props.error;
+        if (error) return React.createElement("div", {className: "error"}, error);
+      },
+
       render: function () {
         return (
           React.createElement("dl", {className: this.getClassName()}, 
             this.renderLabel(), 
             this.renderNote(), 
+            this.renderError(), 
             React.createElement("dd", null, this.props.children)
           )
         );
@@ -144,11 +150,18 @@ define(
     "use strict";
     __exports__["default"] = {
       componentDidMount: function () {
-        this.update({value: {$set: this.props.value}});
+        this.update({
+          value: {$set: this.props.value},
+          error: {$set: this.props.error}
+        });
       },
 
-      onValueChange: function (ev) {
+      handleValueChange: function (ev) {
         this.update({value: {$set: ev.target.value}});
+      },
+
+      handleCheckedChange: function (ev) {
+        this.update({value: {$set: ev.target.checked}});
       }
     };
   });
@@ -167,60 +180,27 @@ define(
     __exports__["default"] = React.createClass({
       mixins: [Cursors, ValueBind],
 
+      getClassName: function () {
+        var classes = [];
+        if (this.state.error) classes.push('input-error');
+        if (this.props.className) classes.join(this.props.className);
+        return classes.join(' ');
+      },
+
       render: function() {
         return (
           React.createElement(Element, {
             label: this.props.label, 
             note: this.props.note, 
-            required: this.props.required
+            error: this.state.error, 
+            required: this.props.required, 
+            className: this.getClassName
           }, 
             React.createElement("input", React.__spread({}, 
-              _.omit(this.props, 'label', 'note'), 
+              _.omit(this.props, 'label', 'note', 'className'), 
               {value: this.state.value, 
-              onChange: this.onValueChange})
+              onChange: this.handleValueChange})
             )
-          )
-        );
-      }
-    });
-  });
-
-// scripts/components/mc-input.es6.jsx
-define(
-  'components/mc-input', ["underscore","cursors","react","mixins/value-bind","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
-    "use strict";
-    var _ = __dependency1__["default"] || __dependency1__;
-    var Cursors = __dependency2__["default"] || __dependency2__;
-    var React = __dependency3__["default"] || __dependency3__;
-    var ValueBind = __dependency4__["default"] || __dependency4__;
-
-    __exports__["default"] = React.createClass({
-      mixins: [Cursors, ValueBind],
-
-      getClassName: function () {
-        var classes = ['form-checkbox'];
-        if (this.props.required) classes.push('required');
-        return classes.join(' ');
-      },
-
-      renderNote: function () {
-        if (this.props.note) return React.createElement("p", {className: "note"}, this.props.note);
-      },
-
-      render: function () {
-        return (
-          React.createElement("div", {className: this.getClassName()}, 
-            React.createElement("label", null, 
-              React.createElement("input", React.__spread({
-                type: "checkbox"}, 
-                _.omit(this.props, 'label'), 
-                {value: this.state.value, 
-                onChange: this.onValueChange})
-              ), 
-              this.props.label
-            ), 
-            this.renderNote()
           )
         );
       }
@@ -229,18 +209,32 @@ define(
 
 // scripts/components/checkbox-input.es6.jsx
 define(
-  'components/checkbox-input', ["cursors","components/mc-input","react","exports"],
+  'components/checkbox-input', ["cursors","react","mixins/value-bind","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
     var Cursors = __dependency1__["default"] || __dependency1__;
-    var McInput = __dependency2__["default"] || __dependency2__;
-    var React = __dependency3__["default"] || __dependency3__;
+    var React = __dependency2__["default"] || __dependency2__;
+    var ValueBind = __dependency3__["default"] || __dependency3__;
 
     __exports__["default"] = React.createClass({
-      mixins: [Cursors],
+      mixins: [Cursors, ValueBind],
 
       render: function () {
-        return React.createElement(McInput, React.__spread({},  this.props, {type: "checkbox"}));
+        return (
+          React.createElement("div", {className: "form-checkbox"}, 
+            React.createElement("label", null, 
+              React.createElement("input", {
+                name: this.props.name, 
+                type: "checkbox", 
+                value: this.props.value, 
+                checked: this.state.value, 
+                onChange: this.handleCheckedChange}
+              ), 
+              this.props.label
+            ), 
+            this.props.note ? React.createElement("p", {className: "note"}, this.props.note) : null
+          )
+        );
       }
     });
   });
@@ -277,17 +271,10 @@ define(
     __exports__["default"] = React.createClass({
       mixins: [Cursors],
 
-      getDefaultProps: function () {
+      getInitialState: function () {
         return {
           value: {},
           error: {}
-        };
-      },
-
-      getInitialState: function () {
-        return {
-          value: this.props.value,
-          error: this.props.error
         };
       },
 
@@ -316,9 +303,7 @@ define(
 
       render: function () {
         return (
-          React.createElement("form", {action: this.props.action, 
-            method: this.props.method, 
-            onSubmit: this.props.onSubmit}, 
+          React.createElement("form", React.__spread({},  this.props), 
             this.renderChildren(this)
           )
         );
@@ -409,18 +394,51 @@ define(
 
 // scripts/components/radio-input.es6.jsx
 define(
-  'components/radio-input', ["cursors","components/mc-input","react","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  'components/radio-input', ["underscore","cursors","components/element","react","mixins/value-bind","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
-    var Cursors = __dependency1__["default"] || __dependency1__;
-    var McInput = __dependency2__["default"] || __dependency2__;
-    var React = __dependency3__["default"] || __dependency3__;
+    var _ = __dependency1__["default"] || __dependency1__;
+    var Cursors = __dependency2__["default"] || __dependency2__;
+    var Element = __dependency3__["default"] || __dependency3__;
+    var React = __dependency4__["default"] || __dependency4__;
+    var ValueBind = __dependency5__["default"] || __dependency5__;
 
     __exports__["default"] = React.createClass({
-      mixins: [Cursors],
+      mixins: [Cursors, ValueBind],
+
+      renderOption: function (data, value) {
+        var checked = this.state.value === value;
+        return (
+          React.createElement("div", {key: value, className: "form-checkbox"}, 
+            React.createElement("label", null, 
+              React.createElement("input", {
+                name: this.props.name, 
+                type: "radio", 
+                value: value, 
+                checked: checked, 
+                onChange: this.handleValueChange}
+              ), 
+              data.label
+            ), 
+            data.note ? React.createElement("p", {className: "note"}, data.note) : null
+          )
+        );
+      },
+
+      renderOptions: function () {
+        return _.map(this.props.options, this.renderOption);
+      },
 
       render: function () {
-        return React.createElement(McInput, React.__spread({},  this.props, {type: "radio"}));
+        return (
+          React.createElement(Element, {
+            label: this.props.label, 
+            note: this.props.note, 
+            required: this.props.required
+          }, 
+            this.renderOptions()
+          )
+        );
       }
     });
   });
@@ -439,6 +457,14 @@ define(
     __exports__["default"] = React.createClass({
       mixins: [Cursors, ValueBind],
 
+      renderOption: function (label, value) {
+        return React.createElement("option", {key: value, value: value}, label);
+      },
+
+      renderOptions: function () {
+        return _.map(this.props.options, this.renderOption);
+      },
+
       render: function () {
         return (
           React.createElement(Element, {
@@ -449,8 +475,9 @@ define(
             React.createElement("select", React.__spread({}, 
               _.omit(this.props, 'label'), 
               {value: this.state.value, 
-              onChange: this.onValueChange}), 
-              this.props.children
+              onChange: this.handleValueChange
+            }), 
+              this.renderOptions()
             )
           )
         );
@@ -499,7 +526,7 @@ define(
             React.createElement("textarea", React.__spread({}, 
               _.omit(this.props, 'label'), 
               {value: this.state.value, 
-              onChange: this.onValueChange})
+              onChange: this.handleValueChange})
             )
           )
         );
@@ -545,8 +572,8 @@ define(
 
 // scripts/former.es6
 define(
-  'former', ["components/basic-input","components/checkbox-input","components/element","components/email-input","components/form","components/mc-input","components/number-input","components/password-input","components/phone-input","components/question-group","components/radio-input","components/select-input","components/submit","components/text-area","components/text-input","components/url-input","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __dependency16__, __exports__) {
+  'former', ["components/basic-input","components/checkbox-input","components/element","components/email-input","components/form","components/number-input","components/password-input","components/phone-input","components/question-group","components/radio-input","components/select-input","components/submit","components/text-area","components/text-input","components/url-input","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __exports__) {
     "use strict";
 
 
@@ -559,24 +586,22 @@ define(
     var Element = __dependency3__["default"] || __dependency3__;
     var EmailInput = __dependency4__["default"] || __dependency4__;
     var Form = __dependency5__["default"] || __dependency5__;
-    var McInput = __dependency6__["default"] || __dependency6__;
-    var NumberInput = __dependency7__["default"] || __dependency7__;
-    var PasswordInput = __dependency8__["default"] || __dependency8__;
-    var PhoneInput = __dependency9__["default"] || __dependency9__;
-    var QuestionGroup = __dependency10__["default"] || __dependency10__;
-    var RadioInput = __dependency11__["default"] || __dependency11__;
-    var SelectInput = __dependency12__["default"] || __dependency12__;
-    var Submit = __dependency13__["default"] || __dependency13__;
-    var TextArea = __dependency14__["default"] || __dependency14__;
-    var TextInput = __dependency15__["default"] || __dependency15__;
-    var UrlInput = __dependency16__["default"] || __dependency16__;
+    var NumberInput = __dependency6__["default"] || __dependency6__;
+    var PasswordInput = __dependency7__["default"] || __dependency7__;
+    var PhoneInput = __dependency8__["default"] || __dependency8__;
+    var QuestionGroup = __dependency9__["default"] || __dependency9__;
+    var RadioInput = __dependency10__["default"] || __dependency10__;
+    var SelectInput = __dependency11__["default"] || __dependency11__;
+    var Submit = __dependency12__["default"] || __dependency12__;
+    var TextArea = __dependency13__["default"] || __dependency13__;
+    var TextInput = __dependency14__["default"] || __dependency14__;
+    var UrlInput = __dependency15__["default"] || __dependency15__;
 
     __exports__.BasicInput = BasicInput;
     __exports__.CheckboxInput = CheckboxInput;
     __exports__.Element = Element;
     __exports__.EmailInput = EmailInput;
     __exports__.Form = Form;
-    __exports__.McInput = McInput;
     __exports__.NumberInput = NumberInput;
     __exports__.PasswordInput = PasswordInput;
     __exports__.PhoneInput = PhoneInput;

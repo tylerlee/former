@@ -70,7 +70,7 @@ input[disabled]{
   border: 1px solid #ccc;
 }
 
-input.input-error{
+former-element-error .input {
   border: 1px solid red;
 }
 
