@@ -15,7 +15,7 @@ export default React.createClass({
   },
 
   renderChild: function (component) {
-    var props = component.props;
+    var props = component && component.props;
     if (!props) return component;
     var cursors = props.cursors;
     if (_.has(props, 'name')) {
