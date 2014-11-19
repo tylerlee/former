@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "ignore": [
     "/.gitignore",
+    "/examples",
     "/node_modules",
-    "/package.json"
+    "/package.json",
+    "/scripts"
   ],
   "devDependencies": {
     "amdainty": "0.2.0",
