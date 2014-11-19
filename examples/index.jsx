@@ -1,33 +1,33 @@
 var React = window.React;
-var f = window.former;
+var F = window.Former;
 
 React.render(React.createFactory(React.createClass({
   render: function () {
     return (
-      <f.Form action='/test' onSubmit={this.handleSubmit}>
+      <F.Form action='/test' onSubmit={this.handleSubmit}>
         <h1>Sample Form</h1>
-        <f.TextInput label='Text Input' size='50' columns='3' />
-        <f.TextInput label='Text Input with Placeholder' placeholder='this is some text' columns='3'/>
-        <f.TextInput label='Disabled Text Input' disabled={true} />
-        <f.TextInput label='Required Text Input' required={true} />
+        <F.TextInput label='Text Input' size='50' columns='3' />
+        <F.TextInput label='Text Input with Placeholder' placeholder='this is some text' columns='3'/>
+        <F.TextInput label='Disabled Text Input' disabled={true} />
+        <F.TextInput label='Required Text Input' required={true} />
 
-        <f.NumberInput label='Number Input' note='pick something awesome'/>
+        <F.NumberInput label='Number Input' note='pick something awesome'/>
 
-        <f.UrlInput
+        <F.UrlInput
           name='my_url'
           error='nope'
           label='Url Input'
           value='wut'
           note='Input Error is not currently a working feature'/>
-        <f.PasswordInput label='Password Input' />
-        <f.PhoneInput label='Phone Input' />
-        <f.EmailInput label='Email Input' placeholder='tyler@orgsync.com' />
+        <F.PasswordInput label='Password Input' />
+        <F.PhoneInput label='Phone Input' />
+        <F.EmailInput label='Email Input' placeholder='tyler@orgsync.com' />
 
-        <f.TextArea name='text-stuff' label='Text Area' required={true}/>
+        <F.TextArea name='text-stuff' label='Text Area' required={true}/>
 
         <hr />
 
-        <f.SelectInput
+        <F.SelectInput
           name='version'
           value='2'
           label='Pick a version'
@@ -39,35 +39,35 @@ React.render(React.createFactory(React.createClass({
             '4': 'Delta',
             '5': 'Iota'
           }}>
-        </f.SelectInput>
+        </F.SelectInput>
 
         <hr />
 
-        <f.QuestionGroup
+        <F.QuestionGroup
           question='What colors do you prefer?'
           note='Pick as many as you would like'>
-          <f.CheckboxInput name='color-blue' label='Blue' />
-          <f.CheckboxInput name='color-red' label='Red' />
-          <f.CheckboxInput name='color-green' label='Green' />
-          <f.CheckboxInput name='color-orange' label='Orange' />
-        </f.QuestionGroup>
+          <F.CheckboxInput name='color-blue' label='Blue' />
+          <F.CheckboxInput name='color-red' label='Red' />
+          <F.CheckboxInput name='color-green' label='Green' />
+          <F.CheckboxInput name='color-orange' label='Orange' />
+        </F.QuestionGroup>
 
         <hr />
 
-        <f.RadioInput
+        <F.RadioInput
           label='Single Radio'
           note='this here is a note about this radio button' />
-        <f.CheckboxInput
+        <F.CheckboxInput
           value={true}
           label='Single Checkbox'
           note='this here is a note about this checkbox' />
 
         <hr />
 
-        <f.QuestionGroup
+        <F.QuestionGroup
           question='Do you agree to this?'
           required={true}>
-          <f.RadioInput
+          <F.RadioInput
             value='no'
             name='agreement'
             options={{
@@ -81,10 +81,10 @@ React.render(React.createFactory(React.createClass({
               }
             }}
           />
-        </f.QuestionGroup>
+        </F.QuestionGroup>
 
-        <f.Submit />
-      </f.Form>
+        <F.Submit />
+      </F.Form>
     );
   }
 }))(), document.getElementById('example-form'));

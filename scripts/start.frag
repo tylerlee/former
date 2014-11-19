@@ -8,6 +8,6 @@
       require('cursors')
     );
   } else {
-    root.former = factory(root._, root.React, root.Cursors);
+    root.Former = factory(root._, root.React, root.Cursors);
   }
 })(this, function (_, React, Cursors) {
