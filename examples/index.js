@@ -1,11 +1,32 @@
 // examples/index.jsx
+var Cursors = window.Cursors;
 var React = window.React;
 var F = window.Former;
 
 React.render(React.createFactory(React.createClass({
+  mixins: [Cursors],
+
+  getInitialState: function () {
+    return {
+      value: {},
+      error: {}
+    };
+  },
+
+  handleSubmit: function (ev) {
+    ev.preventDefault();
+    window.alert(JSON.stringify(this.state.value, null, 2));
+  },
+
   render: function () {
     return (
-      React.createElement(F.Form, {action: "/test", onSubmit: this.handleSubmit}, 
+      React.createElement(F.Form, {
+        onSubmit: this.handleSubmit, 
+        cursors: {
+          value: this.getCursor('value'),
+          error: this.getCursor('error')
+        }
+      }, 
         React.createElement("h1", null, "Sample Form"), 
         React.createElement(F.TextInput, {label: "Text Input", size: "50", columns: "3"}), 
         React.createElement(F.TextInput, {label: "Text Input with Placeholder", placeholder: "this is some text", columns: "3"}), 
