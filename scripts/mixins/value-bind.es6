@@ -1,9 +1,11 @@
+import _ from 'underscore';
+
 export default {
-  componentDidMount: function () {
-    this.update({
-      value: {$set: this.props.value},
-      error: {$set: this.props.error}
-    });
+  componentWillMount: function () {
+    var deltas = {};
+    if (_.has(this.props, 'value')) deltas.value = {$set: this.props.value};
+    if (_.has(this.props, 'error')) deltas.error = {$set: this.props.error};
+    this.update(deltas);
   },
 
   handleValueChange: function (ev) {

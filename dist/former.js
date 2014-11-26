@@ -145,15 +145,17 @@ define(
 
 // scripts/mixins/value-bind.es6
 define(
-  'mixins/value-bind', ["exports"],
-  function(__exports__) {
+  'mixins/value-bind', ["underscore","exports"],
+  function(__dependency1__, __exports__) {
     "use strict";
+    var _ = __dependency1__["default"] || __dependency1__;
+
     __exports__["default"] = {
-      componentDidMount: function () {
-        this.update({
-          value: {$set: this.props.value},
-          error: {$set: this.props.error}
-        });
+      componentWillMount: function () {
+        var deltas = {};
+        if (_.has(this.props, 'value')) deltas.value = {$set: this.props.value};
+        if (_.has(this.props, 'error')) deltas.error = {$set: this.props.error};
+        this.update(deltas);
       },
 
       handleValueChange: function (ev) {
