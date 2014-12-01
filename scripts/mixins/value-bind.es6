@@ -1,7 +1,7 @@
 import _ from 'underscore';
 
 export default {
-  componentWillMount: function () {
+  componentDidMount: function () {
     var deltas = {};
     if (_.has(this.props, 'value')) deltas.value = {$set: this.props.value};
     if (_.has(this.props, 'error')) deltas.error = {$set: this.props.error};

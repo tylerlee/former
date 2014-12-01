@@ -36,10 +36,10 @@ React.render(React.createFactory(React.createClass({
         React.createElement(F.NumberInput, {label: "Number Input", note: "pick something awesome"}), 
 
         React.createElement(F.UrlInput, {
-          name: "my_url", 
-          error: "nope", 
+          name: "my_url[deets]", 
+          value: "hello", 
+          error: "bad url", 
           label: "Url Input", 
-          value: "wut", 
           note: "Input Error is not currently a working feature"}), 
         React.createElement(F.PasswordInput, {label: "Password Input"}), 
         React.createElement(F.PhoneInput, {label: "Phone Input"}), 
