@@ -1,12 +1,13 @@
 {
   "name": "former",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "ignore": [
     "/.gitignore",
     "/examples",
     "/node_modules",
     "/package.json",
-    "/scripts"
+    "/scripts",
+    "/styles"
   ],
   "devDependencies": {
     "amdainty": "0.2.0",
