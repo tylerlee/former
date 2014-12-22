@@ -33,7 +33,7 @@ $switch-height: 24px;
     z-index: 1;
 
     &:before {
-      @include transform(translate(1px, 1px));
+      @include transform(translate(1px, 1px) scale(1));
       @include transition(all 1s $ease-out-expo);
       background: $grey-lightest;
       border-radius: ($switch-height - 2px) / 2;
@@ -68,14 +68,7 @@ $switch-height: 24px;
 
   .former-switch-display:active:before,
   &.former-switch-active .former-switch-display:before {
-    @include transform(
-      translate(
-        ($switch-width - 2px) / 2,
-        ($switch-height - 2px) / 2
-      )
-    );
-    height: 0;
-    width: 0;
+    @include transform(translate(1px, 1px) scale(0));
   }
 
   &.former-switch-active .former-switch-display {

@@ -24,11 +24,11 @@
   width: 44px;
   z-index: 1; }
   .former-switch .former-switch-display:before {
-    -webkit-transform: translate(1px, 1px);
-    -moz-transform: translate(1px, 1px);
-    -ms-transform: translate(1px, 1px);
-    -o-transform: translate(1px, 1px);
-    transform: translate(1px, 1px);
+    -webkit-transform: translate(1px, 1px) scale(1);
+    -moz-transform: translate(1px, 1px) scale(1);
+    -ms-transform: translate(1px, 1px) scale(1);
+    -o-transform: translate(1px, 1px) scale(1);
+    transform: translate(1px, 1px) scale(1);
     -webkit-transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
     -moz-transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
@@ -61,13 +61,11 @@
     .former-switch .former-switch-display:active:after {
       width: 26px; }
 .former-switch .former-switch-display:active:before, .former-switch.former-switch-active .former-switch-display:before {
-  -webkit-transform: translate(21px, 11px);
-  -moz-transform: translate(21px, 11px);
-  -ms-transform: translate(21px, 11px);
-  -o-transform: translate(21px, 11px);
-  transform: translate(21px, 11px);
-  height: 0;
-  width: 0; }
+  -webkit-transform: translate(1px, 1px) scale(0);
+  -moz-transform: translate(1px, 1px) scale(0);
+  -ms-transform: translate(1px, 1px) scale(0);
+  -o-transform: translate(1px, 1px) scale(0);
+  transform: translate(1px, 1px) scale(0); }
 .former-switch.former-switch-active .former-switch-display {
   background: #87d361;
   border-color: #87d361; }
