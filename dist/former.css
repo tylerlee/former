@@ -1,0 +1,80 @@
+/* styles/former.scss */
+.former-switch .former-switch-container {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle; }
+.former-switch input {
+  height: 24px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 44px; }
+.former-switch .former-switch-display {
+  -webkit-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  -moz-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  background: #ccc;
+  border-radius: 12px;
+  height: 24px;
+  width: 44px; }
+  .former-switch .former-switch-display:before {
+    -webkit-transform: translate(1px, 1px);
+    -moz-transform: translate(1px, 1px);
+    -ms-transform: translate(1px, 1px);
+    -o-transform: translate(1px, 1px);
+    transform: translate(1px, 1px);
+    -webkit-transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    -moz-transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    background: #f9f9f9;
+    border-radius: 11px;
+    content: '';
+    display: block;
+    height: 22px;
+    position: absolute;
+    width: 42px; }
+  .former-switch .former-switch-display:after {
+    -webkit-transform: translate(1px, 1px);
+    -moz-transform: translate(1px, 1px);
+    -ms-transform: translate(1px, 1px);
+    -o-transform: translate(1px, 1px);
+    transform: translate(1px, 1px);
+    -webkit-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    -moz-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    background: #fff;
+    border-radius: 11px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    content: '';
+    display: block;
+    height: 22px;
+    position: absolute;
+    width: 22px; }
+  .former-switch .former-switch-display:active {
+    background: #ccc; }
+    .former-switch .former-switch-display:active:after {
+      width: 26px; }
+.former-switch .former-switch-display:active:before, .former-switch.former-switch-active .former-switch-display:before {
+  -webkit-transform: translate(21px, 11px);
+  -moz-transform: translate(21px, 11px);
+  -ms-transform: translate(21px, 11px);
+  -o-transform: translate(21px, 11px);
+  transform: translate(21px, 11px);
+  height: 0;
+  width: 0; }
+.former-switch.former-switch-active .former-switch-display {
+  background: #87d361;
+  border-color: #87d361; }
+  .former-switch.former-switch-active .former-switch-display:active:after {
+    -webkit-transform: translate(17px, 1px);
+    -moz-transform: translate(17px, 1px);
+    -ms-transform: translate(17px, 1px);
+    -o-transform: translate(17px, 1px);
+    transform: translate(17px, 1px); }
+  .former-switch.former-switch-active .former-switch-display:after {
+    -webkit-transform: translate(21px, 1px);
+    -moz-transform: translate(21px, 1px);
+    -ms-transform: translate(21px, 1px);
+    -o-transform: translate(21px, 1px);
+    transform: translate(21px, 1px); }

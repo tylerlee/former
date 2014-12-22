@@ -28,6 +28,8 @@ React.render(React.createFactory(React.createClass({
         }
       }, 
         React.createElement("h1", null, "Sample Form"), 
+
+        React.createElement(F.SwitchInput, {name: "dat-switch", label: "Switch it real good"}), 
         React.createElement(F.TextInput, {label: "Text Input", size: "50", columns: "3"}), 
         React.createElement(F.TextInput, {label: "Text Input with Placeholder", placeholder: "this is some text", columns: "3"}), 
         React.createElement(F.TextInput, {label: "Disabled Text Input", disabled: true}), 

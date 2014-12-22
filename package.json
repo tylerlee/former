@@ -1,6 +1,6 @@
 {
   "name": "former",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Tyler Lee",
   "repository": {
     "type": "git",
@@ -9,6 +9,7 @@
   "devDependencies": {
     "cogs": "0.26.2",
     "es6-module-transpiler": "0.4.0",
-    "react-tools": "0.12.0"
+    "node-sass": "1.2.3",
+    "react-tools": "0.12.2"
   }
 }

@@ -521,6 +521,47 @@ define(
     });
   });
 
+// scripts/components/switch-input.es6.jsx
+define(
+  'components/switch-input', ["cursors","react","mixins/value-bind","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var Cursors = __dependency1__["default"] || __dependency1__;
+    var React = __dependency2__["default"] || __dependency2__;
+    var ValueBind = __dependency3__["default"] || __dependency3__;
+
+    __exports__["default"] = React.createClass({
+      mixins: [Cursors, ValueBind],
+
+      getClassName: function () {
+        var classes = ['former-switch'];
+        if (this.state.value) classes.push('former-switch-active');
+        return classes.join(' ');
+      },
+
+      render: function () {
+        return (
+          React.createElement("div", {className: this.getClassName()}, 
+            React.createElement("label", null, 
+              this.props.label, 
+              React.createElement("span", {className: "former-switch-container"}, 
+                React.createElement("input", {
+                  name: this.props.name, 
+                  type: "checkbox", 
+                  value: this.props.value, 
+                  checked: this.state.value, 
+                  onChange: this.handleCheckedChange}
+                ), 
+                React.createElement("div", {className: "former-switch-display"})
+              )
+            ), 
+            this.props.note ? React.createElement("p", {className: "note"}, this.props.note) : null
+          )
+        );
+      }
+    });
+  });
+
 // scripts/components/text-area.es6.jsx
 define(
   'components/text-area', ["underscore","cursors","components/element","react","mixins/value-bind","exports"],
@@ -591,8 +632,8 @@ define(
 
 // scripts/former.es6
 define(
-  'former', ["components/basic-input","components/checkbox-input","components/element","components/email-input","components/form","components/number-input","components/password-input","components/phone-input","components/question-group","components/radio-input","components/select-input","components/submit","components/text-area","components/text-input","components/url-input","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __exports__) {
+  'former', ["components/basic-input","components/checkbox-input","components/element","components/email-input","components/form","components/number-input","components/password-input","components/phone-input","components/question-group","components/radio-input","components/select-input","components/submit","components/switch-input","components/text-area","components/text-input","components/url-input","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __dependency16__, __exports__) {
     "use strict";
 
 
@@ -612,9 +653,10 @@ define(
     var RadioInput = __dependency10__["default"] || __dependency10__;
     var SelectInput = __dependency11__["default"] || __dependency11__;
     var Submit = __dependency12__["default"] || __dependency12__;
-    var TextArea = __dependency13__["default"] || __dependency13__;
-    var TextInput = __dependency14__["default"] || __dependency14__;
-    var UrlInput = __dependency15__["default"] || __dependency15__;
+    var SwitchInput = __dependency13__["default"] || __dependency13__;
+    var TextArea = __dependency14__["default"] || __dependency14__;
+    var TextInput = __dependency15__["default"] || __dependency15__;
+    var UrlInput = __dependency16__["default"] || __dependency16__;
 
     __exports__.BasicInput = BasicInput;
     __exports__.CheckboxInput = CheckboxInput;
@@ -628,6 +670,7 @@ define(
     __exports__.RadioInput = RadioInput;
     __exports__.SelectInput = SelectInput;
     __exports__.Submit = Submit;
+    __exports__.SwitchInput = SwitchInput;
     __exports__.TextArea = TextArea;
     __exports__.TextInput = TextInput;
     __exports__.UrlInput = UrlInput;

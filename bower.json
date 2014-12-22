@@ -1,6 +1,6 @@
 {
   "name": "former",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "ignore": [
     "/.gitignore",
     "/examples",
@@ -10,6 +10,8 @@
   ],
   "devDependencies": {
     "amdainty": "0.2.0",
+    "bourbon": "3.2.3",
+    "velcro": "e522d1d01f",
     "normalize.css": "3.0.2"
   },
   "dependencies": {

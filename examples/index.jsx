@@ -27,6 +27,8 @@ React.render(React.createFactory(React.createClass({
         }}
       >
         <h1>Sample Form</h1>
+
+        <F.SwitchInput name='dat-switch' label='Switch it real good' />
         <F.TextInput label='Text Input' size='50' columns='3' />
         <F.TextInput label='Text Input with Placeholder' placeholder='this is some text' columns='3'/>
         <F.TextInput label='Disabled Text Input' disabled={true} />

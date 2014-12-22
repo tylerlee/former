@@ -6,6 +6,7 @@
   },
   "targets": {
     "scripts/former.es6": "dist",
+    "styles/former.scss": "dist",
     "examples/index.jsx": "examples"
   }
 }

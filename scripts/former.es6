@@ -16,6 +16,7 @@ import QuestionGroup from 'components/question-group';
 import RadioInput from 'components/radio-input';
 import SelectInput from 'components/select-input';
 import Submit from 'components/submit';
+import SwitchInput from 'components/switch-input';
 import TextArea from 'components/text-area';
 import TextInput from 'components/text-input';
 import UrlInput from 'components/url-input';
@@ -33,6 +34,7 @@ export {
   RadioInput,
   SelectInput,
   Submit,
+  SwitchInput,
   TextArea,
   TextInput,
   UrlInput
