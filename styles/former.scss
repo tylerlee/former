@@ -6,6 +6,7 @@ $switch-height: 24px;
 
 .former-switch {
   .former-switch-container {
+    cursor: pointer;
     display: inline-block;
     position: relative;
     vertical-align: middle;
@@ -15,9 +16,11 @@ $switch-height: 24px;
     height: $switch-height;
     left: 0;
     opacity: 0;
+    pointer-events: none;
     position: absolute;
     top: 0;
     width: $switch-width;
+    z-index: 0;
   }
 
   .former-switch-display {
@@ -25,7 +28,9 @@ $switch-height: 24px;
     background: $grey;
     border-radius: $switch-height / 2;
     height: $switch-height;
+    position: relative;
     width: $switch-width;
+    z-index: 1;
 
     &:before {
       @include transform(translate(1px, 1px));

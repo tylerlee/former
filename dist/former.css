@@ -1,5 +1,6 @@
 /* styles/former.scss */
 .former-switch .former-switch-container {
+  cursor: pointer;
   display: inline-block;
   position: relative;
   vertical-align: middle; }
@@ -7,9 +8,11 @@
   height: 24px;
   left: 0;
   opacity: 0;
+  pointer-events: none;
   position: absolute;
   top: 0;
-  width: 44px; }
+  width: 44px;
+  z-index: 0; }
 .former-switch .former-switch-display {
   -webkit-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   -moz-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
@@ -17,7 +20,9 @@
   background: #ccc;
   border-radius: 12px;
   height: 24px;
-  width: 44px; }
+  position: relative;
+  width: 44px;
+  z-index: 1; }
   .former-switch .former-switch-display:before {
     -webkit-transform: translate(1px, 1px);
     -moz-transform: translate(1px, 1px);
