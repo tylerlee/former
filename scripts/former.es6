@@ -22,7 +22,7 @@ import TextArea from 'components/text-area';
 import TextInput from 'components/text-input';
 import UrlInput from 'components/url-input';
 
-export {
+export default {
   BasicInput,
   CheckboxInput,
   Element,

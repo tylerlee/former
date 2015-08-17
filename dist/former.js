@@ -758,12 +758,8 @@ define('components/url-input', ['exports', 'module', 'components/basic-input', '
     }
   });
 });
-define('former', ['exports', 'components/basic-input', 'components/checkbox-input', 'components/element', 'components/email-input', 'components/file-input', 'components/form', 'components/number-input', 'components/password-input', 'components/phone-input', 'components/question-group', 'components/radio-input', 'components/select-input', 'components/submit', 'components/switch-input', 'components/text-area', 'components/text-input', 'components/url-input'], function (exports, _componentsBasicInput, _componentsCheckboxInput, _componentsElement, _componentsEmailInput, _componentsFileInput, _componentsForm, _componentsNumberInput, _componentsPasswordInput, _componentsPhoneInput, _componentsQuestionGroup, _componentsRadioInput, _componentsSelectInput, _componentsSubmit, _componentsSwitchInput, _componentsTextArea, _componentsTextInput, _componentsUrlInput) {
+define('former', ['exports', 'module', 'components/basic-input', 'components/checkbox-input', 'components/element', 'components/email-input', 'components/file-input', 'components/form', 'components/number-input', 'components/password-input', 'components/phone-input', 'components/question-group', 'components/radio-input', 'components/select-input', 'components/submit', 'components/switch-input', 'components/text-area', 'components/text-input', 'components/url-input'], function (exports, module, _componentsBasicInput, _componentsCheckboxInput, _componentsElement, _componentsEmailInput, _componentsFileInput, _componentsForm, _componentsNumberInput, _componentsPasswordInput, _componentsPhoneInput, _componentsQuestionGroup, _componentsRadioInput, _componentsSelectInput, _componentsSubmit, _componentsSwitchInput, _componentsTextArea, _componentsTextInput, _componentsUrlInput) {
   'use strict';
-
-  Object.defineProperty(exports, '__esModule', {
-    value: true
-  });
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -801,23 +797,25 @@ define('former', ['exports', 'components/basic-input', 'components/checkbox-inpu
 
   var _UrlInput = _interopRequireDefault(_componentsUrlInput);
 
-  exports.BasicInput = _BasicInput['default'];
-  exports.CheckboxInput = _CheckboxInput['default'];
-  exports.Element = _Element['default'];
-  exports.EmailInput = _EmailInput['default'];
-  exports.FileInput = _FileInput['default'];
-  exports.Form = _Form['default'];
-  exports.NumberInput = _NumberInput['default'];
-  exports.PasswordInput = _PasswordInput['default'];
-  exports.PhoneInput = _PhoneInput['default'];
-  exports.QuestionGroup = _QuestionGroup['default'];
-  exports.RadioInput = _RadioInput['default'];
-  exports.SelectInput = _SelectInput['default'];
-  exports.Submit = _Submit['default'];
-  exports.SwitchInput = _SwitchInput['default'];
-  exports.TextArea = _TextArea['default'];
-  exports.TextInput = _TextInput['default'];
-  exports.UrlInput = _UrlInput['default'];
+  module.exports = {
+    BasicInput: _BasicInput['default'],
+    CheckboxInput: _CheckboxInput['default'],
+    Element: _Element['default'],
+    EmailInput: _EmailInput['default'],
+    FileInput: _FileInput['default'],
+    Form: _Form['default'],
+    NumberInput: _NumberInput['default'],
+    PasswordInput: _PasswordInput['default'],
+    PhoneInput: _PhoneInput['default'],
+    QuestionGroup: _QuestionGroup['default'],
+    RadioInput: _RadioInput['default'],
+    SelectInput: _SelectInput['default'],
+    Submit: _Submit['default'],
+    SwitchInput: _SwitchInput['default'],
+    TextArea: _TextArea['default'],
+    TextInput: _TextInput['default'],
+    UrlInput: _UrlInput['default']
+  };
 });
   return require('former');
 }));
