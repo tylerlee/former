@@ -36,6 +36,8 @@ React.render(React.createFactory(React.createClass({
 
         <F.NumberInput label='Number Input' note='pick something awesome'/>
 
+        <F.FileInput label='File Input' />
+
         <F.UrlInput
           name='my_url[deets]'
           value='hello'
