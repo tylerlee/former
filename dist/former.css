@@ -1,4 +1,3 @@
-/* styles/former.scss */
 .former-switch .former-switch-container {
   cursor: pointer;
   display: inline-block;
@@ -14,9 +13,9 @@
   width: 44px;
   z-index: 0; }
 .former-switch .former-switch-display {
-  -webkit-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  -moz-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+  -moz-transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
   background: #ccc;
   border-radius: 12px;
   height: 24px;
@@ -45,9 +44,9 @@
     -ms-transform: translate(1px, 1px);
     -o-transform: translate(1px, 1px);
     transform: translate(1px, 1px);
-    -webkit-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    -moz-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+    -moz-transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
     background: #fff;
     border-radius: 11px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);

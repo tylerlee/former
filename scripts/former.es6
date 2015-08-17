@@ -1,13 +1,14 @@
 //= require ./start.frag
 //= require bower_components/amdainty/amdainty.js
 //= require ./components/**/*
-//= requireSelf
+//= requireself
 //= require ./end.frag
 
 import BasicInput from 'components/basic-input';
 import CheckboxInput from 'components/checkbox-input';
 import Element from 'components/element';
 import EmailInput from 'components/email-input';
+import FileInput from 'components/file-input';
 import Form from 'components/form';
 import NumberInput from 'components/number-input';
 import PasswordInput from 'components/password-input';
@@ -26,6 +27,7 @@ export {
   CheckboxInput,
   Element,
   EmailInput,
+  FileInput,
   Form,
   NumberInput,
   PasswordInput,
