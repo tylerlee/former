@@ -7,12 +7,16 @@
     "url": "https://github.com/tylerlee/former"
   },
   "devDependencies": {
-    "cogs": "0.26.2",
+    "cogs": "1.0.5",
     "es6-module-transpiler": "0.4.0",
     "node-sass": "1.2.3",
     "react-tools": "0.12.2"
   },
   "dependencies": {
-    "cogs-transformer-csso": "^1.0.4"
+    "cogs-transformer-babel": "^1.0.12",
+    "cogs-transformer-concat-amd": "^1.0.6",
+    "cogs-transformer-csso": "^1.0.4",
+    "cogs-transformer-directives": "^1.0.3",
+    "cogs-transformer-sass": "^1.0.3"
   }
 }
