@@ -4,6 +4,18 @@
 $switch-width: 44px;
 $switch-height: 24px;
 
+.former-dropzone{
+  background: #f4f4f4;
+  box-sizing: border-box;
+  border: 3px dotted #ccc;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  &.former-active{
+    border: 3px solid green;
+  }
+}
+
 .former-switch {
   .former-switch-container {
     cursor: pointer;

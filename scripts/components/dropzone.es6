@@ -1,3 +1,6 @@
+// Based off of React Dropzone by paramaggarwal
+// https://github.com/paramaggarwal/react-dropzone
+
 import BasicInput from 'components/basic-input';
 import Cursors from 'cursors';
 import React from 'react';
@@ -7,12 +10,10 @@ export default React.createClass({
 
   getDefaultProps: function() {
     return {
-      activeClassName: 'active',
-      className: 'dropzone',
-      height: 100,
+      activeClassName: 'former-active',
+      className: 'former-dropzone',
       multiple: true,
-      supportClick: true,
-      width: 100
+      supportClick: true
     };
   },
 
@@ -97,10 +98,11 @@ export default React.createClass({
     return (
       <div
         className={className}
-        onClick: this.onClick
-        onDragLeave: this.onDragLeave
-        onDragOver: this.onDragOver
-        onDrop: this.onDrop>
+        onClick={this.onClick}
+        onDragLeave={this.onDragLeave}
+        onDragOver={this.onDragOver}
+        onDrop={this.onDrop}>
+        Drop your files here
         <input
           {..._.omit(this.props, 'label', 'note', 'className')}
           value={this.state.value}
@@ -109,7 +111,7 @@ export default React.createClass({
           multiple={this.props.multiple}
           onChange={this.onDrop}
           accept={this.props.accept}
-          style={display: 'none'}
+          style={{display: 'none'}}
         />
       </div>
     );

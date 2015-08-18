@@ -6,6 +6,7 @@
 
 import BasicInput from 'components/basic-input';
 import CheckboxInput from 'components/checkbox-input';
+import Dropzone from 'components/dropzone';
 import Element from 'components/element';
 import EmailInput from 'components/email-input';
 import FileInput from 'components/file-input';
@@ -25,6 +26,7 @@ import UrlInput from 'components/url-input';
 export default {
   BasicInput,
   CheckboxInput,
+  Dropzone,
   Element,
   EmailInput,
   FileInput,

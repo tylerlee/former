@@ -266,6 +266,136 @@ define('components/checkbox-input', ['exports', 'module', 'cursors', 'react', 'm
     }
   });
 });
+define('components/dropzone', ['exports', 'module', 'components/basic-input', 'cursors', 'react'], function (exports, module, _componentsBasicInput, _cursors, _react) {
+  // Based off of React Dropzone by paramaggarwal
+  // https://github.com/paramaggarwal/react-dropzone
+
+  'use strict';
+
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+  var _BasicInput = _interopRequireDefault(_componentsBasicInput);
+
+  var _Cursors = _interopRequireDefault(_cursors);
+
+  var _React = _interopRequireDefault(_react);
+
+  module.exports = _React['default'].createClass({
+    displayName: 'dropzone',
+
+    mixins: [_Cursors['default']],
+
+    getDefaultProps: function getDefaultProps() {
+      return {
+        activeClassName: 'former-active',
+        className: 'former-dropzone',
+        multiple: true,
+        supportClick: true
+      };
+    },
+
+    getInitialState: function getInitialState() {
+      return {
+        isDragActive: false
+      };
+    },
+
+    onDragLeave: function onDragLeave(e) {
+      this.setState({
+        isDragActive: false
+      });
+
+      if (this.props.onDragLeave) {
+        this.props.onDragLeave(e);
+      }
+    },
+
+    onDragOver: function onDragOver(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.dataTransfer.dropEffect = 'copy';
+
+      // set active drag state only when file is dragged into
+      // (in mozilla when file is dragged effect is "uninitialized")
+      var effectAllowed = e.dataTransfer.effectAllowed;
+      if (effectAllowed === 'all' || effectAllowed === 'uninitialized') {
+        this.setState({
+          isDragActive: true
+        });
+      }
+
+      if (this.props.onDragOver) {
+        this.props.onDragOver(e);
+      }
+    },
+
+    onDrop: function onDrop(e) {
+      e.preventDefault();
+
+      this.setState({
+        isDragActive: false
+      });
+
+      var files;
+      if (e.dataTransfer) {
+        files = e.dataTransfer.files;
+      } else if (e.target) {
+        files = e.target.files;
+      }
+
+      var maxFiles = this.props.multiple ? files.length : 1;
+      for (var i = 0; i < maxFiles; i++) {
+        files[i].preview = URL.createObjectURL(files[i]);
+      }
+
+      if (this.props.onDrop) {
+        files = Array.prototype.slice.call(files, 0, maxFiles);
+        this.props.onDrop(files, e);
+      }
+    },
+
+    onClick: function onClick() {
+      if (this.props.supportClick === true) {
+        this.open();
+      }
+    },
+
+    open: function open() {
+      var fileInput = _React['default'].findDOMNode(this.refs.fileInput);
+      fileInput.value = null;
+      fileInput.click();
+    },
+
+    render: function render() {
+      var className = this.props.className;
+      if (this.state.isDragActive) {
+        className += ' ' + this.props.activeClassName;
+      }
+
+      return _React['default'].createElement(
+        'div',
+        {
+          className: className,
+          onClick: this.onClick,
+          onDragLeave: this.onDragLeave,
+          onDragOver: this.onDragOver,
+          onDrop: this.onDrop },
+        'Drop your files here',
+        _React['default'].createElement('input', _extends({}, _.omit(this.props, 'label', 'note', 'className'), {
+          value: this.state.value,
+          type: 'file',
+          ref: 'fileInput',
+          multiple: this.props.multiple,
+          onChange: this.onDrop,
+          accept: this.props.accept,
+          style: { display: 'none' }
+        }))
+      );
+    }
+  });
+});
 define('components/email-input', ['exports', 'module', 'components/basic-input', 'cursors', 'react'], function (exports, module, _componentsBasicInput, _cursors, _react) {
   'use strict';
 
@@ -758,7 +888,7 @@ define('components/url-input', ['exports', 'module', 'components/basic-input', '
     }
   });
 });
-define('former', ['exports', 'module', 'components/basic-input', 'components/checkbox-input', 'components/element', 'components/email-input', 'components/file-input', 'components/form', 'components/number-input', 'components/password-input', 'components/phone-input', 'components/question-group', 'components/radio-input', 'components/select-input', 'components/submit', 'components/switch-input', 'components/text-area', 'components/text-input', 'components/url-input'], function (exports, module, _componentsBasicInput, _componentsCheckboxInput, _componentsElement, _componentsEmailInput, _componentsFileInput, _componentsForm, _componentsNumberInput, _componentsPasswordInput, _componentsPhoneInput, _componentsQuestionGroup, _componentsRadioInput, _componentsSelectInput, _componentsSubmit, _componentsSwitchInput, _componentsTextArea, _componentsTextInput, _componentsUrlInput) {
+define('former', ['exports', 'module', 'components/basic-input', 'components/checkbox-input', 'components/dropzone', 'components/element', 'components/email-input', 'components/file-input', 'components/form', 'components/number-input', 'components/password-input', 'components/phone-input', 'components/question-group', 'components/radio-input', 'components/select-input', 'components/submit', 'components/switch-input', 'components/text-area', 'components/text-input', 'components/url-input'], function (exports, module, _componentsBasicInput, _componentsCheckboxInput, _componentsDropzone, _componentsElement, _componentsEmailInput, _componentsFileInput, _componentsForm, _componentsNumberInput, _componentsPasswordInput, _componentsPhoneInput, _componentsQuestionGroup, _componentsRadioInput, _componentsSelectInput, _componentsSubmit, _componentsSwitchInput, _componentsTextArea, _componentsTextInput, _componentsUrlInput) {
   'use strict';
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -766,6 +896,8 @@ define('former', ['exports', 'module', 'components/basic-input', 'components/che
   var _BasicInput = _interopRequireDefault(_componentsBasicInput);
 
   var _CheckboxInput = _interopRequireDefault(_componentsCheckboxInput);
+
+  var _Dropzone = _interopRequireDefault(_componentsDropzone);
 
   var _Element = _interopRequireDefault(_componentsElement);
 
@@ -800,6 +932,7 @@ define('former', ['exports', 'module', 'components/basic-input', 'components/che
   module.exports = {
     BasicInput: _BasicInput['default'],
     CheckboxInput: _CheckboxInput['default'],
+    Dropzone: _Dropzone['default'],
     Element: _Element['default'],
     EmailInput: _EmailInput['default'],
     FileInput: _FileInput['default'],

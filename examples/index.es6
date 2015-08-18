@@ -38,6 +38,8 @@ React.render(React.createFactory(React.createClass({
 
         <F.FileInput label='File Input' />
 
+        <F.Dropzone />
+
         <F.UrlInput
           name='my_url[deets]'
           value='hello'

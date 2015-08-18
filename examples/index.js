@@ -41,6 +41,7 @@ React.render(React.createFactory(React.createClass({
       React.createElement(F.TextInput, { label: 'Required Text Input', required: true }),
       React.createElement(F.NumberInput, { label: 'Number Input', note: 'pick something awesome' }),
       React.createElement(F.FileInput, { label: 'File Input' }),
+      React.createElement(F.Dropzone, null),
       React.createElement(F.UrlInput, {
         name: 'my_url[deets]',
         value: 'hello',
