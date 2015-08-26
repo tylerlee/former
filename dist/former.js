@@ -292,7 +292,8 @@ define('components/dropzone', ['exports', 'module', 'components/basic-input', 'c
         activeClassName: 'former-active',
         className: 'former-dropzone',
         multiple: true,
-        supportClick: true
+        supportClick: true,
+        size: 5
       };
     },
 
@@ -354,18 +355,16 @@ define('components/dropzone', ['exports', 'module', 'components/basic-input', 'c
         files = Array.prototype.slice.call(files, 0, maxFiles);
         this.props.onDrop(files, e);
       }
+
+      console.log(files);
     },
 
     onClick: function onClick() {
       if (this.props.supportClick === true) {
-        this.open();
+        var fileInput = _React['default'].findDOMNode(this.refs.fileInput);
+        fileInput.value = null;
+        fileInput.click();
       }
-    },
-
-    open: function open() {
-      var fileInput = _React['default'].findDOMNode(this.refs.fileInput);
-      fileInput.value = null;
-      fileInput.click();
     },
 
     render: function render() {

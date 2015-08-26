@@ -10,8 +10,45 @@ React.render(React.createFactory(React.createClass({
   getInitialState: function getInitialState() {
     return {
       value: {},
-      error: {}
+      error: {},
+      files: []
     };
+  },
+
+  onDrop: function onDrop(files) {
+    console.log('Received files: ', files);
+    this.setState({
+      files: files
+    });
+  },
+
+  displayFile: function displayFile(file) {
+    return React.createElement(
+      'li',
+      null,
+      file.name
+    );
+  },
+
+  showFiles: function showFiles() {
+    if (this.state.files.length <= 0) return;
+
+    var files = this.state.files;
+
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'h3',
+        null,
+        'Dropped Files:'
+      ),
+      React.createElement(
+        'ul',
+        null,
+        _.map(files, this.displayFile)
+      )
+    );
   },
 
   handleSubmit: function handleSubmit(ev) {
@@ -41,7 +78,8 @@ React.render(React.createFactory(React.createClass({
       React.createElement(F.TextInput, { label: 'Required Text Input', required: true }),
       React.createElement(F.NumberInput, { label: 'Number Input', note: 'pick something awesome' }),
       React.createElement(F.FileInput, { label: 'File Input' }),
-      React.createElement(F.Dropzone, null),
+      React.createElement(F.Dropzone, { onDrop: this.onDrop }),
+      this.showFiles(),
       React.createElement(F.UrlInput, {
         name: 'my_url[deets]',
         value: 'hello',

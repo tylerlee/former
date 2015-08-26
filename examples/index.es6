@@ -1,3 +1,4 @@
+import _ from 'underscore';
 var Cursors = window.Cursors;
 var React = window.React;
 var F = window.Former;
@@ -8,8 +9,37 @@ React.render(React.createFactory(React.createClass({
   getInitialState: function () {
     return {
       value: {},
-      error: {}
+      error: {},
+      files: []
     };
+  },
+
+  onDrop: function onDrop(files) {
+    console.log('Received files: ', files);
+    this.setState({
+      files: files
+    });
+  },
+
+  displayFile: function (file) {
+    return (
+      <li>{file.name}</li>
+    )
+  },
+
+  showFiles: function() {
+    if (this.state.files.length <= 0) return;
+
+    var files = this.state.files;
+
+    return (
+      <div>
+        <h3>Dropped Files:</h3>
+        <ul>
+          {_.map(files, this.displayFile)}
+        </ul>
+      </div>
+    );
   },
 
   handleSubmit: function (ev) {
@@ -38,7 +68,9 @@ React.render(React.createFactory(React.createClass({
 
         <F.FileInput label='File Input' />
 
-        <F.Dropzone />
+        <F.Dropzone onDrop={this.onDrop} />
+        {this.showFiles()}
+
 
         <F.UrlInput
           name='my_url[deets]'

@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "cursors": "^0.5.0",
-    "underscore": "^1.6.0",
+    "underscore": "~1.8.3",
     "react": "^0.12.0"
   }
 }

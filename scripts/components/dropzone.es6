@@ -13,7 +13,8 @@ export default React.createClass({
       activeClassName: 'former-active',
       className: 'former-dropzone',
       multiple: true,
-      supportClick: true
+      supportClick: true,
+      size: 5
     };
   },
 
@@ -22,6 +23,7 @@ export default React.createClass({
       isDragActive: false
     };
   },
+
 
   onDragLeave: function(e) {
     this.setState({
@@ -75,19 +77,18 @@ export default React.createClass({
       files = Array.prototype.slice.call(files, 0, maxFiles);
       this.props.onDrop(files, e);
     }
+
+    console.log(files);
   },
 
   onClick: function () {
     if (this.props.supportClick === true) {
-      this.open();
+      var fileInput = React.findDOMNode(this.refs.fileInput);
+      fileInput.value = null;
+      fileInput.click();
     }
   },
 
-  open: function() {
-    var fileInput = React.findDOMNode(this.refs.fileInput);
-    fileInput.value = null;
-    fileInput.click();
-  },
 
   render: function() {
     var className = this.props.className;

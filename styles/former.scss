@@ -18,12 +18,12 @@ $switch-height: 24px;
 
 .former-switch {
   .former-switch-container {
-    cursor: pointer;
+    cursor:           pointer;
     display: inline-block;
     position: relative;
     vertical-align: middle;
   }
-
+  
   input {
     height: $switch-height;
     left: 0;
