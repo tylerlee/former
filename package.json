@@ -1,6 +1,6 @@
 {
   "name": "orgsync-former",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Tyler Lee",
   "license": "MIT",
   "repository": {
@@ -9,18 +9,18 @@
   },
   "peerDependencies": {
     "cursors": ">= 0.7.0 < 0.8.0",
-    "underscore": ">= 1.8.3 < 1.9.0",
-    "react": ">= 0.14.0 < 0.15.0"
+    "react": ">= 0.14.0 < 0.15.0",
+    "underscore": ">= 1.6.0 < 1.9.0"
   },
   "devDependencies": {
     "amdainty": "1.0.0",
     "bourbon": "4.2.5",
-    "cogs": "1.0.7",
     "cogs-transformer-babel": "1.0.12",
     "cogs-transformer-concat-amd": "1.0.6",
     "cogs-transformer-csso": "1.0.4",
     "cogs-transformer-directives": "1.0.3",
     "cogs-transformer-sass": "1.0.4",
+    "cogs": "1.0.7",
     "orgsync-velcro": "0.0.6"
   }
 }
