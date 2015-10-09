@@ -88,12 +88,14 @@ define('components/element', ['exports', 'module', 'cursors', 'react'], function
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   module.exports = _React['default'].createClass({
     displayName: 'element',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     getClassName: function getClassName() {
       var classes = ['form'];
@@ -179,6 +181,8 @@ define('components/basic-input', ['exports', 'module', 'underscore', 'cursors', 
 
   var _2 = _interopRequireDefault(_underscore);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _Element = _interopRequireDefault(_componentsElement);
 
   var _React = _interopRequireDefault(_react);
@@ -188,7 +192,7 @@ define('components/basic-input', ['exports', 'module', 'underscore', 'cursors', 
   module.exports = _React['default'].createClass({
     displayName: 'basic-input',
 
-    mixins: [_cursors.Mixin, _ValueBind['default']],
+    mixins: [_Cursors['default'], _ValueBind['default']],
 
     getClassName: function getClassName() {
       var classes = [];
@@ -220,6 +224,8 @@ define('components/checkbox-input', ['exports', 'module', 'cursors', 'react', 'm
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   var _ValueBind = _interopRequireDefault(_mixinsValueBind);
@@ -227,7 +233,7 @@ define('components/checkbox-input', ['exports', 'module', 'cursors', 'react', 'm
   module.exports = _React['default'].createClass({
     displayName: 'checkbox-input',
 
-    mixins: [_cursors.Mixin, _ValueBind['default']],
+    mixins: [_Cursors['default'], _ValueBind['default']],
 
     render: function render() {
       return _React['default'].createElement(
@@ -263,12 +269,14 @@ define('components/email-input', ['exports', 'module', 'components/basic-input',
 
   var _BasicInput = _interopRequireDefault(_componentsBasicInput);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   module.exports = _React['default'].createClass({
     displayName: 'email-input',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     render: function render() {
       return _React['default'].createElement(_BasicInput['default'], _extends({}, this.props, { type: 'email' }));
@@ -284,12 +292,14 @@ define('components/file-input', ['exports', 'module', 'components/basic-input', 
 
   var _BasicInput = _interopRequireDefault(_componentsBasicInput);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   module.exports = _React['default'].createClass({
     displayName: 'file-input',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     render: function render() {
       return _React['default'].createElement(_BasicInput['default'], _extends({}, this.props, { type: 'file' }));
@@ -303,6 +313,8 @@ define('components/form', ['exports', 'module', 'underscore', 'cursors', 'react'
 
   var _2 = _interopRequireDefault(_underscore);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   var getPathFromName = function getPathFromName(name) {
@@ -312,7 +324,7 @@ define('components/form', ['exports', 'module', 'underscore', 'cursors', 'react'
   module.exports = _React['default'].createClass({
     displayName: 'form',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     getInitialState: function getInitialState() {
       return {
@@ -370,12 +382,14 @@ define('components/number-input', ['exports', 'module', 'components/basic-input'
 
   var _BasicInput = _interopRequireDefault(_componentsBasicInput);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   module.exports = _React['default'].createClass({
     displayName: 'number-input',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     render: function render() {
       return _React['default'].createElement(_BasicInput['default'], _extends({}, this.props, { type: 'number' }));
@@ -391,12 +405,14 @@ define('components/password-input', ['exports', 'module', 'components/basic-inpu
 
   var _BasicInput = _interopRequireDefault(_componentsBasicInput);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   module.exports = _React['default'].createClass({
     displayName: 'password-input',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     render: function render() {
       return _React['default'].createElement(_BasicInput['default'], _extends({}, this.props, { type: 'password' }));
@@ -412,12 +428,14 @@ define('components/phone-input', ['exports', 'module', 'components/basic-input',
 
   var _BasicInput = _interopRequireDefault(_componentsBasicInput);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   module.exports = _React['default'].createClass({
     displayName: 'phone-input',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     render: function render() {
       return _React['default'].createElement(_BasicInput['default'], _extends({}, this.props, { type: 'tel' }));
@@ -429,6 +447,8 @@ define('components/question-group', ['exports', 'module', 'cursors', 'components
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _Element = _interopRequireDefault(_componentsElement);
 
   var _React = _interopRequireDefault(_react);
@@ -436,7 +456,7 @@ define('components/question-group', ['exports', 'module', 'cursors', 'components
   module.exports = _React['default'].createClass({
     displayName: 'question-group',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     render: function render() {
       return _React['default'].createElement(
@@ -459,6 +479,8 @@ define('components/radio-input', ['exports', 'module', 'underscore', 'cursors', 
 
   var _2 = _interopRequireDefault(_underscore);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _Element = _interopRequireDefault(_componentsElement);
 
   var _React = _interopRequireDefault(_react);
@@ -468,7 +490,7 @@ define('components/radio-input', ['exports', 'module', 'underscore', 'cursors', 
   module.exports = _React['default'].createClass({
     displayName: 'radio-input',
 
-    mixins: [_cursors.Mixin, _ValueBind['default']],
+    mixins: [_Cursors['default'], _ValueBind['default']],
 
     renderOption: function renderOption(data, value) {
       var checked = this.state.value === value;
@@ -521,6 +543,8 @@ define('components/select-input', ['exports', 'module', 'underscore', 'cursors',
 
   var _2 = _interopRequireDefault(_underscore);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _Element = _interopRequireDefault(_componentsElement);
 
   var _React = _interopRequireDefault(_react);
@@ -530,7 +554,7 @@ define('components/select-input', ['exports', 'module', 'underscore', 'cursors',
   module.exports = _React['default'].createClass({
     displayName: 'select-input',
 
-    mixins: [_cursors.Mixin, _ValueBind['default']],
+    mixins: [_Cursors['default'], _ValueBind['default']],
 
     renderOption: function renderOption(label, value) {
       return _React['default'].createElement(
@@ -571,12 +595,14 @@ define('components/submit', ['exports', 'module', 'cursors', 'react'], function 
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   module.exports = _React['default'].createClass({
     displayName: 'submit',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     render: function render() {
       return _React['default'].createElement('input', _extends({ type: 'submit' }, this.props));
@@ -588,6 +614,8 @@ define('components/switch-input', ['exports', 'module', 'cursors', 'react', 'mix
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   var _ValueBind = _interopRequireDefault(_mixinsValueBind);
@@ -595,7 +623,7 @@ define('components/switch-input', ['exports', 'module', 'cursors', 'react', 'mix
   module.exports = _React['default'].createClass({
     displayName: 'switch-input',
 
-    mixins: [_cursors.Mixin, _ValueBind['default']],
+    mixins: [_Cursors['default'], _ValueBind['default']],
 
     getClassName: function getClassName() {
       var classes = ['former-switch'];
@@ -642,6 +670,8 @@ define('components/text-area', ['exports', 'module', 'underscore', 'cursors', 'c
 
   var _2 = _interopRequireDefault(_underscore);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _Element = _interopRequireDefault(_componentsElement);
 
   var _React = _interopRequireDefault(_react);
@@ -651,7 +681,7 @@ define('components/text-area', ['exports', 'module', 'underscore', 'cursors', 'c
   module.exports = _React['default'].createClass({
     displayName: 'text-area',
 
-    mixins: [_cursors.Mixin, _ValueBind['default']],
+    mixins: [_Cursors['default'], _ValueBind['default']],
 
     render: function render() {
       return _React['default'].createElement(
@@ -678,12 +708,14 @@ define('components/text-input', ['exports', 'module', 'components/basic-input', 
 
   var _BasicInput = _interopRequireDefault(_componentsBasicInput);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   module.exports = _React['default'].createClass({
     displayName: 'text-input',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     render: function render() {
       return _React['default'].createElement(_BasicInput['default'], _extends({}, this.props, { type: 'text' }));
@@ -699,12 +731,14 @@ define('components/url-input', ['exports', 'module', 'components/basic-input', '
 
   var _BasicInput = _interopRequireDefault(_componentsBasicInput);
 
+  var _Cursors = _interopRequireDefault(_cursors);
+
   var _React = _interopRequireDefault(_react);
 
   module.exports = _React['default'].createClass({
     displayName: 'url-input',
 
-    mixins: [_cursors.Mixin],
+    mixins: [_Cursors['default']],
 
     render: function render() {
       return _React['default'].createElement(_BasicInput['default'], _extends({}, this.props, { type: 'url' }));

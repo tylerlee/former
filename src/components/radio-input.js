@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import {Mixin as Cursors} from 'cursors';
+import Cursors from 'cursors';
 import Element from 'components/element';
 import React from 'react';
 import ValueBind from 'mixins/value-bind';

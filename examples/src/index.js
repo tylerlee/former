@@ -1,24 +1,28 @@
-import {Component} from 'cursors';
+import Cursors from 'cursors';
 import React from 'react';
 import Former from 'former';
 
 const F = Former;
 
-export default class extends Component {
-  state = {
-    value: {},
-    error: {}
-  }
+export default React.createClass({
+  mixins: [Cursors],
+
+  getInitialState() {
+    return {
+      value: {},
+      error: {}
+    };
+  },
 
   handleSubmit(ev) {
     ev.preventDefault();
     window.alert(JSON.stringify(this.state.value, null, 2));
-  }
+  },
 
   render() {
     return (
       <F.Form
-        onSubmit={::this.handleSubmit}
+        onSubmit={this.handleSubmit}
         cursors={{
           value: this.getCursor('value'),
           error: this.getCursor('error')
@@ -110,4 +114,4 @@ export default class extends Component {
       </F.Form>
     );
   }
-}
+});
