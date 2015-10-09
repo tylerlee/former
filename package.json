@@ -1,18 +1,26 @@
 {
   "name": "former",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "author": "Tyler Lee",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/tylerlee/former"
   },
-  "devDependencies": {
-    "cogs": "0.26.2",
-    "es6-module-transpiler": "0.4.0",
-    "node-sass": "1.2.3",
-    "react-tools": "0.12.2"
+  "peerDependencies": {
+    "cursors": ">= 0.7.0 < 0.8.0",
+    "underscore": ">= 1.8.3 < 1.9.0",
+    "react": ">= 0.14.0 < 0.15.0"
   },
-  "dependencies": {
-    "cogs-transformer-csso": "^1.0.4"
+  "devDependencies": {
+    "amdainty": "1.0.0",
+    "bourbon": "4.2.5",
+    "cogs": "1.0.7",
+    "cogs-transformer-babel": "1.0.12",
+    "cogs-transformer-concat-amd": "1.0.6",
+    "cogs-transformer-csso": "1.0.4",
+    "cogs-transformer-directives": "1.0.3",
+    "cogs-transformer-sass": "1.0.4",
+    "orgsync-velcro": "0.0.6"
   }
 }

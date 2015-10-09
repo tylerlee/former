@@ -3,6 +3,7 @@
   display: inline-block;
   position: relative;
   vertical-align: middle; }
+
 .former-switch input {
   height: 24px;
   left: 0;
@@ -12,10 +13,11 @@
   top: 0;
   width: 44px;
   z-index: 0; }
+
 .former-switch .former-switch-display {
-  -webkit-transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
-  -moz-transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
-  transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  -moz-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   background: #ccc;
   border-radius: 12px;
   height: 24px;
@@ -44,9 +46,9 @@
     -ms-transform: translate(1px, 1px);
     -o-transform: translate(1px, 1px);
     transform: translate(1px, 1px);
-    -webkit-transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
-    -moz-transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    -moz-transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     background: #fff;
     border-radius: 11px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -59,12 +61,15 @@
     background: #ccc; }
     .former-switch .former-switch-display:active:after {
       width: 26px; }
-.former-switch .former-switch-display:active:before, .former-switch.former-switch-active .former-switch-display:before {
+
+.former-switch .former-switch-display:active:before,
+.former-switch.former-switch-active .former-switch-display:before {
   -webkit-transform: translate(1px, 1px) scale(0);
   -moz-transform: translate(1px, 1px) scale(0);
   -ms-transform: translate(1px, 1px) scale(0);
   -o-transform: translate(1px, 1px) scale(0);
   transform: translate(1px, 1px) scale(0); }
+
 .former-switch.former-switch-active .former-switch-display {
   background: #87d361;
   border-color: #87d361; }

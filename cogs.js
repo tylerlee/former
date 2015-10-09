@@ -1,35 +1,27 @@
 module.exports = {
   in: {
-    es6: {
-      out: 'js',
-      transformers: [
-        'directives',
-        {name: 'babel', except: 'examples/index.es6', options: {modules: 'amd'}},
-        {name: 'babel', only: 'examples/index.es6', options: {modules: 'ignore'}}
-      ]
-    },
-
     js: {
       transformers: [
-        'directives', {
+        'directives',
+        {name: 'babel', only: 'src/**/*', options: {modules: 'amd', stage: 0}},
+        {
+          name: 'babel',
+          only: 'examples/**/*',
+          options: {modules: 'umd', stage: 0}
+        },
+        {
           name: 'concat-amd',
-          options: {
-            base: 'scripts',
-            extensions: ['es6']
-          }
+          except: 'examples/**/*',
+          options: {base: 'src'}
         }
       ]
     },
-
-    scss: {
-      out: 'css',
-      transformers: ['directives', 'sass']
-    }
+    scss: {out: 'css', transformers: ['directives', 'sass']}
   },
-
   builds: {
-    'scripts/former.es6': 'dist',
+    'src/former.js': 'dist',
     'styles/former.scss': 'dist',
-    'examples/index.es6': 'examples'
+    'examples/src/index.js': 'examples/dist',
+    'examples/styles/index.scss': 'examples/dist'
   }
-}
+};

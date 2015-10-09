@@ -1,26 +1,24 @@
-var Cursors = window.Cursors;
-var React = window.React;
-var F = window.Former;
+import {Component} from 'cursors';
+import React from 'react';
+import Former from 'former';
 
-React.render(React.createFactory(React.createClass({
-  mixins: [Cursors],
+const F = Former;
 
-  getInitialState: function () {
-    return {
-      value: {},
-      error: {}
-    };
-  },
+export default class extends Component {
+  state = {
+    value: {},
+    error: {}
+  }
 
-  handleSubmit: function (ev) {
+  handleSubmit(ev) {
     ev.preventDefault();
     window.alert(JSON.stringify(this.state.value, null, 2));
-  },
+  }
 
-  render: function () {
+  render() {
     return (
       <F.Form
-        onSubmit={this.handleSubmit}
+        onSubmit={::this.handleSubmit}
         cursors={{
           value: this.getCursor('value'),
           error: this.getCursor('error')
@@ -58,11 +56,11 @@ React.render(React.createFactory(React.createClass({
           label='Pick a version'
           note='You can only pick one.'
           options={{
-            '1': 'Alpha',
-            '2': 'Beta',
-            '3': 'Gamma',
-            '4': 'Delta',
-            '5': 'Iota'
+            1: 'Alpha',
+            2: 'Beta',
+            3: 'Gamma',
+            4: 'Delta',
+            5: 'Iota'
           }}>
         </F.SelectInput>
 
@@ -112,4 +110,4 @@ React.render(React.createFactory(React.createClass({
       </F.Form>
     );
   }
-}))(), document.getElementById('example-form'));
+}

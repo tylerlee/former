@@ -1,8 +1,8 @@
-//= require ./start.frag
-//= require bower_components/amdainty/amdainty.js
-//= require ./components/**/*
-//= requireself
-//= require ./end.frag
+// = require ./start.frag
+// = require node_modules/amdainty/amdainty.js
+// = require ./components/**/*
+// = requireself
+// = require ./end.frag
 
 import BasicInput from 'components/basic-input';
 import CheckboxInput from 'components/checkbox-input';

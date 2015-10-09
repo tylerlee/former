@@ -1,8 +1,6 @@
 import _ from 'underscore';
-import Cursors from 'cursors';
+import {Mixin as Cursors} from 'cursors';
 import React from 'react';
-
-var cloneWithProps = React.addons.cloneWithProps;
 
 var getPathFromName = function (name) {
   return _.compact(name.split(/\[|]\[|]/));
@@ -41,12 +39,11 @@ export default React.createClass({
         error: this.getCursor('error', path)
       });
     }
-    return cloneWithProps(component, {
-      children: this.renderChildren(component),
-      cursors: cursors,
-      key: component.key || void 0,
-      ref: component.ref || void 0
-    });
+    return React.cloneElement(
+      component,
+      {cursors},
+      this.renderChildren(component)
+    );
   },
 
   renderChildren: function (component) {

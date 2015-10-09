@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>Former Examples</title>
+    <link rel='stylesheet' href='https://rawgit.com/necolas/normalize.css/master/normalize.css'>
+    <link rel='stylesheet' href='examples/dist/index.css'>
+    <link rel='stylesheet' href='dist/former.css'>
+    <script src='https://rawgit.com/jashkenas/underscore/1.8.3/underscore-min.js'></script>
+    <script src='https://rawgit.com/facebook/react-bower/v0.14.0/react-with-addons.min.js'></script>
+    <script src='https://rawgit.com/facebook/react-bower/v0.14.0/react-dom.min.js'></script>
+    <script>window._update = window.React.addons.update</script>
+    <script src='https://rawgit.com/caseywebdev/cursors/0.7.1/cursors.js'></script>
+    <script>window.cursors = window.Cursors</script>
+    <script src='dist/former.js'></script>
+    <script src='examples/dist/index.js'></script>
+    <script src='http://localhost:35729/livereload.js?snipver=1'></script>
+  </head>
+  <body>
+    <div id='main'></div>
+    <script>
+      window.ReactDOM.render(
+        window.React.createFactory(window.index)(),
+        document.getElementById('main')
+      );
+    </script>
+  </body>
+</html>

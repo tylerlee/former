@@ -1,5 +1,5 @@
 import BasicInput from 'components/basic-input';
-import Cursors from 'cursors';
+import {Mixin as Cursors} from 'cursors';
 import React from 'react';
 
 export default React.createClass({

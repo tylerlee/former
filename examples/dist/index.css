@@ -1,0 +1,67 @@
+body {
+  background: #f4f4f4;
+  line-height: 1.5rem;
+  padding: 20px; }
+
+form {
+  background: white;
+  border: 1px solid #dedede;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px; }
+
+dd {
+  margin: 0; }
+
+dl, .form-checkbox {
+  margin-bottom: 2rem; }
+
+dl .form-checkbox {
+  margin-bottom: 0; }
+
+label, p {
+  margin: 0; }
+
+dd {
+  margin-top: .5rem; }
+
+.form-checkbox input {
+  display: inline-block;
+  margin-right: 8px; }
+
+.note {
+  color: #777;
+  font-size: .8rem; }
+
+.required dt > label:after {
+  color: red;
+  content: 'REQUIRED';
+  font-size: .8rem;
+  margin-left: 5px;
+  opacity: .5; }
+
+textarea,
+select,
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="email"],
+input[type="number"],
+input[type="password"] {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  max-width: 400px;
+  padding: 8px;
+  width: 100%; }
+
+input[disabled] {
+  background: #f4f4f4;
+  border: 1px solid #ccc; }
+
+former-element-error .input {
+  border: 1px solid red; }
+
+hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 0 0 2rem 0; }

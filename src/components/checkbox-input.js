@@ -1,4 +1,4 @@
-import Cursors from 'cursors';
+import {Mixin as Cursors} from 'cursors';
 import React from 'react';
 import ValueBind from 'mixins/value-bind';
 

@@ -2,4 +2,4 @@ BIN=node_modules/.bin/
 COGS=$(BIN)cogs
 
 cogs:
-	$(COGS) -w examples/index.es6,scripts,styles
+	$(COGS) -w src,styles,examples/src,examples/styles
