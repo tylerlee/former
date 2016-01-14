@@ -1,6 +1,6 @@
 {
   "name": "orgsync-former",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "Tyler Lee",
   "license": "MIT",
   "main": "dist/former.js",
@@ -23,5 +23,8 @@
     "cogs-transformer-sass": "1.0.4",
     "cogs": "1.0.7",
     "orgsync-velcro": "0.0.6"
+  },
+  "browser": {
+    "former": false
   }
 }
