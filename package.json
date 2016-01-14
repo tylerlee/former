@@ -1,8 +1,9 @@
 {
   "name": "orgsync-former",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "Tyler Lee",
   "license": "MIT",
+  "main": "dist/former.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/tylerlee/former"
