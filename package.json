@@ -1,6 +1,6 @@
 {
   "name": "orgsync-former",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": "Tyler Lee",
   "license": "MIT",
   "main": "dist/former.js",
@@ -9,9 +9,9 @@
     "url": "https://github.com/tylerlee/former"
   },
   "peerDependencies": {
-    "cursors": ">= 0.8.0 < 0.9.0",
-    "react": ">= 0.14.0 < 0.15.0",
-    "underscore": ">= 1.6.0 < 1.9.0"
+    "cursors": "0.8",
+    "react": "0.14 || 15",
+    "underscore": ">= 1.6.0 < 2"
   },
   "devDependencies": {
     "amdainty": "1.0.0",
